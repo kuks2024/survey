@@ -1,0 +1,1196 @@
+<title>조합원 동행 시스템</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Song+Myung&family=Noto+Sans+KR:wght@400;500;600;700;900&display=swap" rel="stylesheet">
+
+<style>
+  :root{
+    color-scheme: light;
+    --bg:#F6F7F1;
+    --surface:#FFFFFF;
+    --surface-alt:#ECEFE4;
+    --surface-sunken:#E4E8D9;
+    --text:#1E2A1B;
+    --text-secondary:#4B5A43;
+    --text-muted:#828C77;
+    --accent:#2F6B3F;
+    --accent-strong:#1F4E2C;
+    --accent-soft:#DCEBDD;
+    --soil:#A66A2E;
+    --soil-soft:#F3E6D3;
+    --soil-strong:#7C4E1E;
+    --river:#3E6E8E;
+    --river-soft:#DDEAF1;
+    --river-strong:#28495F;
+    --line:rgba(30,42,27,0.14);
+    --line-strong:rgba(30,42,27,0.28);
+    --warn-bg:#FBEEDA;
+    --warn-text:#7A4A12;
+    --warn-line:#E7C892;
+    --shadow:0 24px 60px -34px rgba(30,42,27,0.45);
+    --series-1:#2a78d6;
+    --series-2:#eb6834;
+  }
+  @media (prefers-color-scheme: dark){
+    :root:not([data-theme="light"]){
+      color-scheme: dark;
+      --bg:#10140D;
+      --surface:#171C13;
+      --surface-alt:#1D2317;
+      --surface-sunken:#12160E;
+      --text:#EAEEE1;
+      --text-secondary:#B4C0A6;
+      --text-muted:#7C8971;
+      --accent:#74CE81;
+      --accent-strong:#9BE0A5;
+      --accent-soft:#213A26;
+      --soil:#DDA35E;
+      --soil-soft:#2C2013;
+      --soil-strong:#F0C084;
+      --river:#7FB8DE;
+      --river-soft:#16242C;
+      --river-strong:#B7DCF2;
+      --line:rgba(234,238,225,0.14);
+      --line-strong:rgba(234,238,225,0.26);
+      --warn-bg:#2C2313;
+      --warn-text:#E7C088;
+      --warn-line:#4A3A1C;
+      --shadow:0 24px 60px -34px rgba(0,0,0,0.65);
+      --series-1:#3987e5;
+      --series-2:#d95926;
+    }
+  }
+  :root[data-theme="dark"]{
+    color-scheme: dark;
+    --bg:#10140D;
+    --surface:#171C13;
+    --surface-alt:#1D2317;
+    --surface-sunken:#12160E;
+    --text:#EAEEE1;
+    --text-secondary:#B4C0A6;
+    --text-muted:#7C8971;
+    --accent:#74CE81;
+    --accent-strong:#9BE0A5;
+    --accent-soft:#213A26;
+    --soil:#DDA35E;
+    --soil-soft:#2C2013;
+    --soil-strong:#F0C084;
+    --river:#7FB8DE;
+    --river-soft:#16242C;
+    --river-strong:#B7DCF2;
+    --line:rgba(234,238,225,0.14);
+    --line-strong:rgba(234,238,225,0.26);
+    --warn-bg:#2C2313;
+    --warn-text:#E7C088;
+    --warn-line:#4A3A1C;
+    --shadow:0 24px 60px -34px rgba(0,0,0,0.65);
+    --series-1:#3987e5;
+    --series-2:#d95926;
+  }
+
+  *{box-sizing:border-box;}
+  html,body{margin:0;padding:0;}
+  body{
+    background:var(--bg);
+    color:var(--text);
+    font-family:'Noto Sans KR','Apple SD Gothic Neo','Malgun Gothic',sans-serif;
+    line-height:1.6;
+    -webkit-font-smoothing:antialiased;
+  }
+  @media (prefers-reduced-motion: reduce){
+    *{animation-duration:0.001ms !important; transition-duration:0.001ms !important;}
+  }
+  h1,h2,h3{text-wrap:balance; margin:0;}
+  p{margin:0;}
+  button{font-family:inherit;}
+  :focus-visible{outline:2px solid var(--accent); outline-offset:2px; border-radius:4px;}
+
+  .wrap{max-width:1180px; margin:0 auto; padding:0 24px 96px;}
+
+  /* ---------- Top chrome ---------- */
+  .topbar{
+    padding:40px 24px 32px;
+    border-bottom:1px solid var(--line);
+    background:linear-gradient(180deg, var(--surface-alt), var(--bg));
+  }
+  .topbar-inner{max-width:1180px; margin:0 auto; display:flex; flex-wrap:wrap; gap:20px; justify-content:space-between; align-items:flex-end;}
+  .brand{display:flex; align-items:flex-start; gap:14px;}
+  .brand-mark{
+    width:44px;height:44px;border-radius:12px;
+    background:var(--accent); color:#fff;
+    display:flex;align-items:center;justify-content:center;
+    font-family:'Song Myung',serif; font-size:1.3rem;
+    box-shadow:var(--shadow);
+    flex:none; margin-top:2px;
+  }
+  .brand-name{display:block; font-size:0.72rem; font-weight:800; letter-spacing:0.1em; color:var(--accent-strong); text-transform:uppercase; margin-bottom:4px;}
+  .brand-text h1{
+    font-family:'Song Myung','Noto Serif KR',serif;
+    font-size:1.5rem; font-weight:400; letter-spacing:-0.005em; line-height:1.3;
+    max-width:20ch;
+  }
+  .brand-text .subline{font-size:0.85rem; color:var(--text-secondary); margin-top:8px;}
+  .meta-pills{display:flex; gap:8px; flex-wrap:wrap;}
+  .pill{
+    font-size:0.72rem; font-weight:600; letter-spacing:0.02em;
+    padding:6px 12px; border-radius:999px;
+    border:1px solid var(--line-strong);
+    color:var(--text-secondary); background:var(--surface);
+    white-space:nowrap;
+  }
+  .pill.is-accent{background:var(--accent-soft); color:var(--accent-strong); border-color:transparent;}
+
+  .lede{max-width:1180px; margin:24px auto 0; padding:0 24px;}
+  .lede p{font-size:1rem; color:var(--text-secondary); max-width:68ch;}
+  .lede strong{color:var(--text); font-weight:600;}
+
+  .obj-grid{max-width:1180px; margin:22px auto 0; padding:0 24px; display:grid; grid-template-columns:repeat(5,1fr); gap:12px;}
+  @media (max-width:920px){ .obj-grid{grid-template-columns:repeat(2,1fr);} }
+  @media (max-width:520px){ .obj-grid{grid-template-columns:1fr;} }
+  .obj-card{background:var(--surface); border:1px solid var(--line-strong); border-radius:14px; padding:16px 14px; box-shadow:var(--shadow);}
+  .obj-num{font-family:'Song Myung',serif; font-size:1.15rem; color:var(--accent-strong); margin-bottom:6px;}
+  .obj-card h3{font-size:0.82rem; font-weight:800; margin-bottom:4px;}
+  .obj-card p{font-size:0.74rem; color:var(--text-secondary);}
+
+  /* ---------- Section shell ---------- */
+  section.block{padding:56px 0 0;}
+  .block-head{display:flex; flex-direction:column; gap:8px; margin-bottom:28px;}
+  .eyebrow{font-size:0.72rem; font-weight:700; letter-spacing:0.08em; color:var(--soil-strong); text-transform:uppercase;}
+  .block-head h2{font-size:1.4rem; font-weight:700;}
+  .block-head .desc{font-size:0.92rem; color:var(--text-secondary); max-width:66ch;}
+
+  /* ---------- Workspace: phone + rail ---------- */
+  .workspace{display:grid; grid-template-columns: 380px 1fr; gap:32px; align-items:start;}
+  @media (max-width: 860px){ .workspace{grid-template-columns:1fr;} }
+
+  .phone{
+    width:100%; max-width:380px; margin:0 auto;
+    background:var(--surface);
+    border:1px solid var(--line-strong);
+    border-radius:34px;
+    box-shadow:var(--shadow);
+    padding:14px;
+    position:sticky; top:24px;
+  }
+  .phone-screen{
+    background:var(--surface-sunken);
+    border-radius:22px;
+    overflow:hidden;
+    display:flex; flex-direction:column;
+    height:680px;
+  }
+  .phone-status{
+    display:flex; align-items:center; justify-content:space-between;
+    padding:12px 18px 8px;
+    font-size:0.7rem; color:var(--text-muted); font-weight:600;
+    flex:none;
+  }
+  .phone-status .demo-badge{
+    background:var(--soil-soft); color:var(--soil-strong);
+    padding:2px 8px; border-radius:6px; font-size:0.65rem; letter-spacing:0.04em;
+  }
+  .phone-brand-row{
+    display:flex; align-items:center; gap:8px;
+    padding:0 18px 14px;
+    border-bottom:1px solid var(--line);
+    flex:none;
+  }
+  .phone-brand-row .dot{width:8px;height:8px;border-radius:50%;background:var(--accent);}
+  .phone-brand-row span{font-size:0.8rem; font-weight:700; color:var(--text);}
+
+  .progress-track{height:4px; background:var(--line); margin:0 18px; flex:none;}
+  .progress-fill{height:100%; background:var(--accent); transition:width .35s ease;}
+  .step-label{padding:10px 18px 0; font-size:0.68rem; color:var(--text-muted); font-weight:600; letter-spacing:0.03em; flex:none;}
+
+  .screen-body{flex:1; padding:14px 18px 18px; overflow-y:auto;}
+  .screen-title{font-size:1.05rem; font-weight:700; margin-bottom:4px;}
+  .screen-sub{font-size:0.8rem; color:var(--text-secondary); margin-bottom:16px;}
+
+  .field{margin-bottom:20px;}
+  .field-label{font-size:0.82rem; font-weight:700; margin-bottom:8px; display:block;}
+  .field-hint{font-size:0.7rem; color:var(--text-muted); margin-top:6px;}
+
+  .chip-row{display:flex; flex-wrap:wrap; gap:8px;}
+  .chip{position:relative;}
+  .chip input{position:absolute; opacity:0; width:1px;height:1px;}
+  .chip label{
+    display:block; cursor:pointer; user-select:none;
+    padding:8px 14px; border-radius:999px;
+    border:1px solid var(--line-strong);
+    background:var(--surface); color:var(--text-secondary);
+    font-size:0.78rem; font-weight:600;
+    transition:background .15s ease, color .15s ease, border-color .15s ease;
+  }
+  .chip input:checked + label{
+    background:var(--accent); border-color:var(--accent); color:#fff;
+  }
+  .chip input:focus-visible + label{outline:2px solid var(--accent); outline-offset:2px;}
+  .chip.is-disabled label{opacity:0.35; cursor:not-allowed;}
+
+  .opt-card{position:relative; display:block;}
+  .opt-card input{position:absolute; opacity:0; width:1px; height:1px;}
+  .opt-card label{
+    display:flex; flex-direction:column; gap:2px;
+    padding:10px 14px; border-radius:12px;
+    border:1px solid var(--line-strong); background:var(--surface);
+    cursor:pointer; margin-bottom:8px;
+    transition:border-color .15s ease, background .15s ease;
+  }
+  .opt-card label b{font-size:0.85rem;}
+  .opt-card label span{font-size:0.72rem; color:var(--text-muted);}
+  .opt-card input:checked + label{border-color:var(--accent); background:var(--accent-soft);}
+  .opt-card input:checked + label b{color:var(--accent-strong);}
+  .opt-card input:focus-visible + label{outline:2px solid var(--accent); outline-offset:2px;}
+
+  .select-row{display:flex; flex-direction:column; gap:0;}
+
+  .consent-box{
+    background:var(--surface); border:1px solid var(--line-strong);
+    border-radius:14px; padding:14px; margin-bottom:14px;
+  }
+  .info-row{display:flex; gap:10px; align-items:flex-start; margin-bottom:10px; font-size:0.78rem; color:var(--text-secondary);}
+  .info-row .ico{flex:none; width:20px; height:20px; color:var(--accent); margin-top:1px;}
+  .consent-check{display:flex; gap:10px; align-items:flex-start; padding-top:10px; border-top:1px solid var(--line);}
+  .consent-check input{margin-top:3px;}
+  .consent-check label{font-size:0.82rem; font-weight:600;}
+
+  .warn-card{
+    background:var(--warn-bg); border:1px solid var(--warn-line); color:var(--warn-text);
+    border-radius:12px; padding:12px 14px; font-size:0.78rem; margin-bottom:18px;
+  }
+  .warn-card b{display:block; margin-bottom:4px; font-size:0.8rem;}
+  .warn-card .warn-toggle{
+    margin-top:8px; font-size:0.72rem; font-weight:700;
+    background:transparent; border:1px solid var(--warn-text); color:var(--warn-text);
+    padding:5px 10px; border-radius:999px; cursor:pointer;
+  }
+  .warn-card .warn-toggle[aria-pressed="true"]{background:var(--warn-text); color:var(--warn-bg);}
+
+  .module-tag{
+    display:inline-flex; align-items:center; gap:6px;
+    font-size:0.68rem; font-weight:700; padding:4px 10px; border-radius:999px;
+    margin-bottom:12px;
+  }
+  .module-tag.city{background:var(--accent-soft); color:var(--accent-strong);}
+  .module-tag.hill{background:var(--soil-soft); color:var(--soil-strong);}
+  .module-tag.plain{background:var(--river-soft); color:var(--river-strong);}
+
+  .likert{display:flex; gap:6px; margin-top:6px;}
+  .likert-btn{
+    flex:1; padding:9px 0; border-radius:10px; border:1px solid var(--line-strong);
+    background:var(--surface); color:var(--text-secondary); font-size:0.78rem; font-weight:700;
+    cursor:pointer; text-align:center;
+  }
+  .likert-btn[aria-pressed="true"]{background:var(--accent); border-color:var(--accent); color:#fff;}
+  .likert-caps{display:flex; justify-content:space-between; font-size:0.64rem; color:var(--text-muted); margin-top:4px;}
+
+  .filter-toggle{display:flex; gap:10px;}
+  .filter-btn{
+    flex:1; padding:14px 8px; border-radius:14px; border:1px solid var(--line-strong);
+    background:var(--surface); font-size:0.86rem; font-weight:800; cursor:pointer; color:var(--text);
+  }
+  .filter-btn[aria-pressed="true"]{background:var(--accent); border-color:var(--accent); color:#fff;}
+
+  .matrix{border:1px solid var(--line-strong); border-radius:12px; overflow:hidden; margin-top:6px;}
+  .matrix-row{padding:10px 12px; border-top:1px solid var(--line);}
+  .matrix-row:first-child{border-top:none;}
+  .matrix-row .m-label{font-size:0.76rem; font-weight:600; margin-bottom:7px; color:var(--text);}
+  .matrix-scale{display:flex; gap:5px;}
+  .m-btn{flex:1; height:30px; border-radius:8px; border:1px solid var(--line-strong); background:var(--surface); color:var(--text-secondary); font-size:0.72rem; font-weight:700; cursor:pointer;}
+  .m-btn[aria-pressed="true"]{background:var(--accent); border-color:var(--accent); color:#fff;}
+  .m-btn.na{flex:1.5; font-size:0.62rem;}
+
+  .multi-hint{font-size:0.68rem; color:var(--text-muted); margin-top:7px;}
+
+  .freeform{width:100%; min-height:90px; border-radius:12px; border:1px solid var(--line-strong); background:var(--surface); padding:10px 12px; font-family:inherit; font-size:0.82rem; color:var(--text); resize:vertical;}
+  .freeform::placeholder{color:var(--text-muted);}
+
+  .screen-nav{display:flex; gap:10px; padding:12px 18px 18px; border-top:1px solid var(--line); flex:none;}
+  .btn{
+    flex:1; padding:11px 0; border-radius:12px; font-size:0.85rem; font-weight:700;
+    border:1px solid var(--line-strong); background:var(--surface); color:var(--text);
+    cursor:pointer;
+  }
+  .btn.primary{background:var(--accent); border-color:var(--accent); color:#fff;}
+  .btn:disabled{opacity:0.4; cursor:not-allowed;}
+  .btn.ghost{background:transparent;}
+
+  .done-summary{display:flex; flex-wrap:wrap; gap:6px; margin:14px 0;}
+  .done-summary .pill{background:var(--accent-soft); color:var(--accent-strong); border-color:transparent;}
+
+  /* ---------- Rail ---------- */
+  .rail{display:flex; flex-direction:column; gap:12px;}
+  .rail-card{
+    background:var(--surface); border:1px solid var(--line-strong);
+    border-radius:16px; padding:16px 18px;
+    transition:border-color .2s ease, box-shadow .2s ease, background .2s ease;
+  }
+  .rail-card.is-active{border-color:var(--accent); box-shadow:0 0 0 1px var(--accent) inset; background:var(--accent-soft);}
+  .rail-card-top{display:flex; align-items:flex-start; justify-content:space-between; gap:10px; margin-bottom:6px;}
+  .rail-card-top h3{font-size:0.9rem; font-weight:700;}
+  .rail-badge{
+    flex:none; font-size:0.64rem; font-weight:800; color:var(--text-muted);
+    background:var(--surface-alt); border-radius:999px; padding:3px 9px; white-space:nowrap;
+  }
+  .rail-card.is-active .rail-badge{background:var(--accent); color:#fff;}
+  .rail-card p{font-size:0.8rem; color:var(--text-secondary);}
+  .rail-live{
+    display:none; align-items:center; gap:5px; font-size:0.66rem; font-weight:700;
+    color:var(--accent-strong); margin-top:8px; letter-spacing:0.02em;
+  }
+  .rail-card.is-active .rail-live{display:inline-flex;}
+  .rail-live .blip{width:6px; height:6px; border-radius:50%; background:var(--accent); animation:pulse 1.6s ease-in-out infinite;}
+  @keyframes pulse{0%,100%{opacity:1;}50%{opacity:0.35;}}
+
+  /* ---------- Chart & stats ---------- */
+  .chart-card{
+    background:var(--surface); border:1px solid var(--line-strong); border-radius:18px;
+    padding:24px; box-shadow:var(--shadow);
+  }
+  .chart-legend{display:flex; gap:18px; flex-wrap:wrap; margin-bottom:18px;}
+  .legend-item{display:flex; align-items:center; gap:7px; font-size:0.8rem; color:var(--text-secondary); font-weight:600;}
+  .legend-swatch{width:11px;height:11px;border-radius:3px;}
+  .chart-area{display:flex; gap:26px; align-items:flex-end; height:220px; padding:0 4px; border-bottom:1px solid var(--line-strong); position:relative;}
+  .chart-area::before{
+    content:""; position:absolute; inset:0 0 auto 0; height:100%;
+    background-image:repeating-linear-gradient(to top, var(--line) 0, var(--line) 1px, transparent 1px, transparent 25%);
+    pointer-events:none;
+  }
+  .chart-group{flex:1; display:flex; gap:8px; align-items:flex-end; height:100%; position:relative;}
+  .chart-bar{
+    flex:1; border-radius:4px 4px 0 0; position:relative; min-width:0;
+    display:flex; align-items:flex-start; justify-content:center;
+  }
+  .chart-bar .val{
+    position:absolute; top:-20px; font-size:0.68rem; font-weight:700; color:var(--text-secondary);
+    font-variant-numeric:tabular-nums;
+  }
+  .chart-axis{display:flex; gap:26px; margin-top:10px; padding:0 4px;}
+  .chart-axis span{flex:1; text-align:center; font-size:0.72rem; color:var(--text-muted); font-weight:600;}
+  .chart-note{font-size:0.74rem; color:var(--text-muted); margin-top:18px;}
+
+  .stat-row{display:grid; grid-template-columns:repeat(auto-fit,minmax(220px,1fr)); gap:14px; margin-top:16px;}
+  .stat-tile{background:var(--surface-alt); border-radius:14px; padding:16px 18px;}
+  .stat-tile .num{font-family:'Song Myung',serif; font-size:1.7rem; color:var(--accent-strong); font-variant-numeric:tabular-nums;}
+  .stat-tile .label{font-size:0.78rem; color:var(--text-secondary); margin-top:3px;}
+
+  /* ---------- Track diagram ---------- */
+  .track-stack{display:flex; flex-direction:column; gap:14px;}
+  .track{
+    display:flex; gap:16px; align-items:center;
+    background:var(--surface); border:1px solid var(--line-strong); border-radius:16px;
+    padding:18px 20px; box-shadow:var(--shadow);
+  }
+  .track-ico{
+    flex:none; width:44px; height:44px; border-radius:12px;
+    display:flex; align-items:center; justify-content:center; color:#fff;
+  }
+  .track.primary .track-ico{background:var(--accent);}
+  .track.secondary .track-ico{background:var(--soil);}
+  .track-body h3{font-size:0.95rem; font-weight:800; margin-bottom:3px;}
+  .track-body p{font-size:0.82rem; color:var(--text-secondary);}
+  .track-note{
+    margin-top:14px; font-size:0.8rem; color:var(--text-secondary);
+    background:var(--surface-alt); border-radius:12px; padding:12px 16px;
+  }
+
+  /* ---------- Type module spec ---------- */
+  .type-grid{display:grid; grid-template-columns:repeat(3,1fr); gap:16px;}
+  @media (max-width:760px){ .type-grid{grid-template-columns:1fr;} }
+  .type-card{background:var(--surface); border:1px solid var(--line-strong); border-radius:16px; padding:20px; box-shadow:var(--shadow);}
+  .type-card-head{display:flex; align-items:center; gap:10px; margin-bottom:14px;}
+  .type-swatch{width:34px; height:34px; border-radius:10px; flex:none; display:flex; align-items:center; justify-content:center; color:#fff; font-size:0.9rem; font-weight:800;}
+  .type-card h3{font-size:1rem; font-weight:800;}
+  .type-card .type-desc{font-size:0.76rem; color:var(--text-muted); margin-top:2px;}
+  .type-q{padding:10px 0; border-top:1px solid var(--line); font-size:0.84rem; color:var(--text-secondary);}
+  .type-q:first-of-type{border-top:none;}
+  .type-q b{display:block; color:var(--text); font-size:0.86rem; margin-bottom:2px;}
+
+  /* ---------- Compliance checklist ---------- */
+  .check-grid{display:grid; grid-template-columns:repeat(2,1fr); gap:14px;}
+  @media (max-width:760px){ .check-grid{grid-template-columns:1fr;} }
+  .check-card{
+    display:flex; gap:12px; background:var(--surface); border:1px solid var(--line-strong);
+    border-radius:14px; padding:16px 18px; box-shadow:var(--shadow);
+  }
+  .check-ico{flex:none; width:26px; height:26px; color:var(--accent);}
+  .check-card h3{font-size:0.9rem; font-weight:800; margin-bottom:4px;}
+  .check-card p{font-size:0.8rem; color:var(--text-secondary);}
+
+  /* ---------- Expect grid ---------- */
+  .expect-grid{display:grid; grid-template-columns:repeat(auto-fit,minmax(210px,1fr)); gap:14px;}
+  .expect-card{background:var(--surface); border:1px solid var(--line-strong); border-radius:16px; padding:18px; box-shadow:var(--shadow);}
+  .expect-card .tag{font-size:0.66rem; font-weight:800; color:var(--accent-strong); text-transform:uppercase; letter-spacing:0.05em; margin-bottom:8px; display:block;}
+  .expect-card h3{font-size:0.94rem; font-weight:800; margin-bottom:6px;}
+  .expect-card p{font-size:0.8rem; color:var(--text-secondary); margin-bottom:10px;}
+  .expect-card .metric{font-size:0.72rem; color:var(--text-muted); border-top:1px solid var(--line); padding-top:8px;}
+
+  /* ---------- Timeline ---------- */
+  .timeline{display:flex; flex-direction:column;}
+  .tstep{display:flex; gap:16px; padding-bottom:24px; position:relative;}
+  .tstep:not(:last-child)::before{content:""; position:absolute; left:17px; top:38px; bottom:-6px; width:2px; background:var(--line-strong);}
+  .tstep .tnum{flex:none; width:36px; height:36px; border-radius:50%; background:var(--accent); color:#fff; display:flex; align-items:center; justify-content:center; font-weight:800; font-size:0.85rem; z-index:1;}
+  .tstep .tbody{padding-top:4px;}
+  .tstep .tperiod{font-size:0.7rem; font-weight:700; color:var(--soil-strong); margin-bottom:2px;}
+  .tstep h3{font-size:0.92rem; font-weight:800; margin-bottom:3px;}
+  .tstep p{font-size:0.82rem; color:var(--text-secondary);}
+  .tstep .towner{font-size:0.7rem; color:var(--text-muted); margin-top:4px;}
+
+  /* ---------- Closing ---------- */
+  .closing{background:var(--surface); border:1px solid var(--line-strong); border-radius:20px; padding:32px; box-shadow:var(--shadow);}
+  .closing p{font-size:0.95rem; color:var(--text-secondary); max-width:70ch;}
+  .closing p + p{margin-top:12px;}
+  .closing .sign{margin-top:20px; font-family:'Song Myung',serif; font-size:1.05rem; color:var(--text);}
+
+  footer{
+    margin-top:64px; padding:24px; border-top:1px solid var(--line);
+    text-align:center; font-size:0.76rem; color:var(--text-muted);
+  }
+</style>
+
+<div class="topbar">
+  <div class="topbar-inner">
+    <div class="brand">
+      <div class="brand-mark" aria-hidden="true">
+        <svg width="22" height="22" viewBox="0 0 24 24" fill="none"><path d="M12 21c0-6 3-9 7-11-2 6-3 9-7 11Z" stroke="white" stroke-width="1.6" stroke-linejoin="round"/><path d="M12 21c0-6-3-9-7-11 2 6 3 9 7 11Z" stroke="white" stroke-width="1.6" stroke-linejoin="round"/><path d="M12 21V9" stroke="white" stroke-width="1.6" stroke-linecap="round"/></svg>
+      </div>
+      <div class="brand-text">
+        <h1>조합원과 동행하는 데이터 기반 의사결정 시스템</h1>
+        <p class="subline">농협 조합원 만족도·수요조사 모바일 설문 시스템 — 데모</p>
+      </div>
+    </div>
+    <div class="meta-pills">
+      <span class="pill is-accent">DEMO v0.3</span>
+      <span class="pill">8개 분야 43문항 + 보완 5건</span>
+    </div>
+  </div>
+  <div class="lede">
+    <p>농업 환경이 빠르게 바뀌는 가운데, 조합 운영이 조합원의 실제 필요와 계속 어긋나지 않으려면 그 목소리를 정기적으로 데이터로 모으는 채널이 필요합니다. <strong>이 설문은 신용·경제·복지 사업 전반의 만족도를 정량화하고, 도입을 원하는 신규 사업·작목·복지 서비스를 미리 파악해 향후 5개년 경영계획의 근거로 삼기 위해 설계</strong>했으며, 세그먼트 교차분석·신용경제 연계·고령농 투트랙·개인정보 대응·유형별 모듈 다섯 가지 검토 의견을 추가로 반영했습니다.</p>
+  </div>
+  <div class="obj-grid">
+    <div class="obj-card"><div class="obj-num">01</div><h3>만족도 정량 측정</h3><p>신용·경제·복지 사업 전반을 숫자로 확인합니다</p></div>
+    <div class="obj-card"><div class="obj-num">02</div><h3>미충족 수요 발굴</h3><p>드러나지 않았던 조합원의 필요를 찾아냅니다</p></div>
+    <div class="obj-card"><div class="obj-num">03</div><h3>신규 사업 우선순위</h3><p>도입 희망 작목·서비스의 우선순위를 가려냅니다</p></div>
+    <div class="obj-card"><div class="obj-num">04</div><h3>중장기 계획 근거</h3><p>5개년 사업계획을 세울 실증 자료를 마련합니다</p></div>
+    <div class="obj-card"><div class="obj-num">05</div><h3>참여·신뢰 제고</h3><p>의견이 반영되는 경험으로 거버넌스 신뢰를 높입니다</p></div>
+  </div>
+</div>
+
+<div class="wrap">
+
+  <section class="block" id="demo">
+    <div class="block-head">
+      <span class="eyebrow">Interactive Demo</span>
+      <h2>모바일 설문 미리보기</h2>
+      <p class="desc">왼쪽 화면을 직접 눌러 조합원 응답 흐름을 체험해 보세요. 오른쪽 목록은 원안 43문항에 세그먼트·연계·유형별 모듈 보완 문항이 어떻게 배치되어 있는지, 지금 어느 구간을 보고 있는지 실시간으로 보여줍니다.</p>
+    </div>
+
+    <div class="workspace">
+      <div class="phone">
+        <div class="phone-screen">
+          <div class="phone-status">
+            <span>9:41</span>
+            <span class="demo-badge">시연용 프로토타입</span>
+          </div>
+          <div class="phone-brand-row">
+            <span class="dot"></span>
+            <span>조합원 설문</span>
+          </div>
+          <div class="progress-track"><div class="progress-fill" id="progressFill"></div></div>
+          <div class="step-label" id="stepLabel"></div>
+          <div class="screen-body" id="screenBody"></div>
+          <div class="screen-nav" id="screenNav"></div>
+        </div>
+      </div>
+
+      <div class="rail" id="rail">
+        <div class="rail-card" data-section="0">
+          <div class="rail-card-top"><h3>응답자 기본정보</h3><span class="rail-badge">Q1–Q5 · 6문항</span></div>
+          <p>성별·연령·가입기간·영농형태·경작규모에 소속 농협 유형을 더해, 조합원 그룹별 교차분석 키를 데이터 수집 단계부터 명시했습니다.</p>
+          <div class="rail-live"><span class="blip"></span>지금 이 화면에 적용됨</div>
+        </div>
+        <div class="rail-card" data-section="1">
+          <div class="rail-card-top"><h3>유형별 특화 모듈</h3><span class="rail-badge">보완 모듈 · 2문항</span></div>
+          <p>앞서 선택한 도시형·중산간형·평야형 유형에 따라 문항이 자동으로 바뀌는 신설 모듈입니다.</p>
+          <div class="rail-live"><span class="blip"></span>지금 이 화면에 적용됨</div>
+        </div>
+        <div class="rail-card" data-section="2">
+          <div class="rail-card-top"><h3>조합 전반적 만족도</h3><span class="rail-badge">Q6–Q10 · 5문항</span></div>
+          <p>리더십·소통·투명성 등 세부 항목과 추천의향(NPS)까지 함께 측정합니다.</p>
+          <div class="rail-live"><span class="blip"></span>지금 이 화면에 적용됨</div>
+        </div>
+        <div class="rail-card" data-section="3">
+          <div class="rail-card-top"><h3>신용사업 평가</h3><span class="rail-badge">Q11–Q17 · 9문항</span></div>
+          <p>이용 여부에 따라 문항이 분기되며, 경제사업 결제수단·정산계좌 지정 여부를 함께 물어 신용·경제 연계 실태를 확인하는 신설 문항을 더했습니다.</p>
+          <div class="rail-live"><span class="blip"></span>지금 이 화면에 적용됨</div>
+        </div>
+        <div class="rail-card" data-section="4">
+          <div class="rail-card-top"><h3>경제사업 평가</h3><span class="rail-badge">Q18–Q25 · 8문항</span></div>
+          <p>농자재·판매유통 만족도와 조합 이용 비중을 함께 파악해 계통 출하 의존도를 진단합니다.</p>
+          <div class="rail-live"><span class="blip"></span>지금 이 화면에 적용됨</div>
+        </div>
+        <div class="rail-card" data-section="5">
+          <div class="rail-card-top"><h3>복지사업 평가</h3><span class="rail-badge">Q26–Q31 · 6문항</span></div>
+          <p>인지도와 만족도 사이의 격차를 확인해 홍보 사각지대를 찾아냅니다.</p>
+          <div class="rail-live"><span class="blip"></span>지금 이 화면에 적용됨</div>
+        </div>
+        <div class="rail-card" data-section="6">
+          <div class="rail-card-top"><h3>도입 희망 사업·작목</h3><span class="rail-badge">Q32–Q35 · 4문항</span></div>
+          <p>신규 사업 분야와 도전하고 싶은 작목 수요를 사전에 파악합니다.</p>
+          <div class="rail-live"><span class="blip"></span>지금 이 화면에 적용됨</div>
+        </div>
+        <div class="rail-card" data-section="7">
+          <div class="rail-card-top"><h3>도입 희망 복지·서비스</h3><span class="rail-badge">Q36–Q38 · 3문항</span></div>
+          <p>새로운 복지 서비스 수요와 자부담 의향까지 함께 확인합니다.</p>
+          <div class="rail-live"><span class="blip"></span>지금 이 화면에 적용됨</div>
+        </div>
+        <div class="rail-card" data-section="8">
+          <div class="rail-card-top"><h3>미래 비전 및 자유의견</h3><span class="rail-badge">Q39–Q43 · 5문항</span></div>
+          <p>향후 5년의 방향성과 조합원의 자유로운 의견을 마지막에 담습니다.</p>
+          <div class="rail-live"><span class="blip"></span>지금 이 화면에 적용됨</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="block" id="analytics">
+    <div class="block-head">
+      <span class="eyebrow">Admin Preview · 검토의견 1·2</span>
+      <h2>관리자용 교차분석 미리보기</h2>
+      <p class="desc">Q2 연령대를 기준으로 사업 영역별 만족도를 60대 미만·60대 이상으로 나누어 비교하고, 신설된 신용·경제 연계 문항으로 자금 이탈 여부까지 함께 짚어낼 수 있습니다. 예시 데이터이며 실제 조사 결과가 아닙니다.</p>
+    </div>
+    <div class="chart-card">
+      <div class="chart-legend">
+        <div class="legend-item"><span class="legend-swatch" style="background:var(--series-1)"></span>60대 미만</div>
+        <div class="legend-item"><span class="legend-swatch" style="background:var(--series-2)"></span>60대 이상</div>
+      </div>
+      <div class="chart-area" id="chartArea"></div>
+      <div class="chart-axis">
+        <span>조합 전반</span><span>신용사업</span><span>경제사업</span><span>복지사업</span>
+      </div>
+      <p class="chart-note">※ 5점 만점 평균 만족도 — 시연을 위한 예시 수치입니다.</p>
+      <div class="stat-row">
+        <div class="stat-tile"><div class="num">62%</div><div class="label">경제사업 이용자 중 농협 신용사업을 주거래로 이용하는 비율</div></div>
+        <div class="stat-tile"><div class="num">71%</div><div class="label">농산물 판매대금 정산계좌를 조합으로 지정한 비율</div></div>
+        <div class="stat-tile"><div class="num">1위</div><div class="label">타행 주거래 사유 — "금리·한도 조건"</div></div>
+      </div>
+      <p class="chart-note">※ 위 세 지표는 신설된 신용·경제 연계 문항(신용사업 평가 화면)을 근거로 산출되는 예시 지표입니다.</p>
+    </div>
+  </section>
+
+  <section class="block" id="track">
+    <div class="block-head">
+      <span class="eyebrow">검토의견 3</span>
+      <h2>투트랙(Two-Track) 조사 채널 전략</h2>
+      <p class="desc">모바일 웹 단일 조사로는 스마트폰이 낯선 70~80대 고령 조합원이 중도 이탈하거나 응답이 젊은 층 위주로 쏠릴 수 있습니다. 두 채널을 병행합니다.</p>
+    </div>
+    <div class="track-stack">
+      <div class="track primary">
+        <div class="track-ico" aria-hidden="true">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none"><rect x="7" y="2" width="10" height="20" rx="2" stroke="white" stroke-width="1.8"/><line x1="10" y1="18" x2="14" y2="18" stroke="white" stroke-width="1.8" stroke-linecap="round"/></svg>
+        </div>
+        <div class="track-body">
+          <h3>Track 1 · 모바일 웹 설문 (기본)</h3>
+          <p>조합원 개별 고유 링크를 통해 전 조합원에게 기본 제공됩니다. 응답 소요 10~15분.</p>
+        </div>
+      </div>
+      <div class="track secondary">
+        <div class="track-ico" aria-hidden="true">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none"><path d="M4 5c0-1 1-2 2-2h2l2 5-2 2c1 3 3 5 6 6l2-2 5 2v2c0 1-1 2-2 2C11 20 4 13 4 5Z" stroke="white" stroke-width="1.6" stroke-linejoin="round"/></svg>
+        </div>
+        <div class="track-body">
+          <h3>Track 2 · ARS·전화면접 또는 대면조사 병행</h3>
+          <p>고령농 비중이 높은 지역·명부상 70대 이상 조합원에게는 농협 직원·영농지도사 대면조사 또는 ARS·전화면접을 함께 제공해 표본 왜곡을 방지합니다. 설문 화면에서도 70대 이상 응답자에게는 전환 신청 버튼이 즉시 노출됩니다.</p>
+        </div>
+      </div>
+    </div>
+    <p class="track-note">제안서 예산안에 지역별 대면조사 인력비와 ARS 콜 비용을 별도 항목으로 반영할 것을 권고합니다.</p>
+  </section>
+
+  <section class="block" id="modules">
+    <div class="block-head">
+      <span class="eyebrow">검토의견 5 · 핵심 스펙</span>
+      <h2>농협 유형별 특화 선택 모듈</h2>
+      <p class="desc">전국 농협을 도시형·중산간형·평야형으로 나누고, 제안서에 바로 삽입할 수 있도록 유형별 문항 모듈을 별도 장표로 정리했습니다. 조합원이 기본정보 화면에서 유형을 선택하면 설문에도 동일하게 반영됩니다.</p>
+    </div>
+    <div class="type-grid">
+      <div class="type-card">
+        <div class="type-card-head">
+          <div class="type-swatch" style="background:var(--accent)">도</div>
+          <div><h3>도시형</h3><p class="type-desc">겸업·귀농·1인가구 비중이 높은 지역</p></div>
+        </div>
+        <div class="type-q"><b>로컬푸드 직매장 이용 빈도</b>주 1회 이상 / 월 1~3회 / 거의 이용 안 함</div>
+        <div class="type-q"><b>1인가구·귀농인 특화 금융상품 관심도</b>5점 척도</div>
+        <div class="type-q"><b>온라인·모바일 채널 선호도</b>5점 척도</div>
+      </div>
+      <div class="type-card">
+        <div class="type-card-head">
+          <div class="type-swatch" style="background:var(--soil)">중</div>
+          <div><h3>중산간형</h3><p class="type-desc">임산물·고령농 비중이 높은 지역</p></div>
+        </div>
+        <div class="type-q"><b>임산물 유통지원 서비스 만족도</b>5점 척도</div>
+        <div class="type-q"><b>고령농 영농대행(방제·수확) 이용 의향</b>이미 이용중 / 의향 있음 / 없음</div>
+        <div class="type-q"><b>대면·방문 상담 필요도</b>5점 척도</div>
+      </div>
+      <div class="type-card">
+        <div class="type-card-head">
+          <div class="type-swatch" style="background:var(--river)">평</div>
+          <div><h3>평야형</h3><p class="type-desc">대규모 경작·미곡 중심 지역</p></div>
+        </div>
+        <div class="type-q"><b>미곡종합처리장(RPC) 이용 만족도</b>5점 척도</div>
+        <div class="type-q"><b>대형 농기계 공동이용 서비스 수요</b>5점 척도</div>
+        <div class="type-q"><b>수확기 자금(영농자금) 회전 만족도</b>5점 척도</div>
+      </div>
+    </div>
+  </section>
+
+  <section class="block" id="privacy">
+    <div class="block-head">
+      <span class="eyebrow">검토의견 4</span>
+      <h2>개인정보·위탁선거법 대응</h2>
+      <p class="desc">조합원 명부 활용에 따른 개인정보 리스크와, 조합장 임기 중 전수조사가 유발할 수 있는 위탁선거법 위반 오해를 방지하기 위한 장치입니다.</p>
+    </div>
+    <div class="check-grid">
+      <div class="check-card">
+        <svg class="check-ico" viewBox="0 0 24 24" fill="none"><path d="M4 6l8 6 8-6" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/><rect x="3" y="5" width="18" height="14" rx="2" stroke="currentColor" stroke-width="1.6"/></svg>
+        <div><h3>조합원 개별 고유링크 발송</h3><p>명부상 연락처로 조합원 한 분당 하나의 고유 링크를 발송해 중복·대리 응답을 방지합니다.</p></div>
+      </div>
+      <div class="check-card">
+        <svg class="check-ico" viewBox="0 0 24 24" fill="none"><rect x="4" y="7" width="16" height="13" rx="2" stroke="currentColor" stroke-width="1.6"/><path d="M8 7V5a4 4 0 0 1 8 0v2" stroke="currentColor" stroke-width="1.6"/></svg>
+        <div><h3>개인정보 위탁계약 프로세스</h3><p>조사 대행사와 개인정보 처리위탁 계약을 체결하고, 목적 외 이용 금지 조항을 명시합니다.</p></div>
+      </div>
+      <div class="check-card">
+        <svg class="check-ico" viewBox="0 0 24 24" fill="none"><path d="M4 6h16M4 12h16M4 18h10" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></svg>
+        <div><h3>문항 사전 심의</h3><p>조합장 개인의 치적을 홍보하는 문항을 배제하고, 객관적 경영지표 측정 문항만으로 구성합니다.</p></div>
+      </div>
+      <div class="check-card">
+        <svg class="check-ico" viewBox="0 0 24 24" fill="none"><path d="M12 21s-7-4.4-7-10V5l7-3 7 3v6c0 5.6-7 10-7 10Z" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/></svg>
+        <div><h3>위탁선거법 가이드라인 준수</h3><p>조사 목적과 주체를 사전에 고지하고, 특정 후보에 대한 지지·반대를 유도하지 않습니다.</p></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="block" id="impact">
+    <div class="block-head">
+      <span class="eyebrow">기대효과</span>
+      <h2>설문 결과, 무엇이 달라지는가</h2>
+      <p class="desc">단순 만족도 조사를 넘어, 다섯 개 분야에서 조합 경영에 바로 쓸 수 있는 근거 자료가 만들어집니다.</p>
+    </div>
+    <div class="expect-grid">
+      <div class="expect-card"><span class="tag">경영 의사결정</span><h3>조합원 수요 기반 사업 우선순위 도출</h3><p>임직원의 경험과 직관이 아니라 데이터로 투자 우선순위를 재조정합니다.</p><div class="metric">측정 지표 · 사업별 도입 희망률 순위</div></div>
+      <div class="expect-card"><span class="tag">서비스 품질</span><h3>신용·경제·복지 사업 만족도 정량화</h3><p>세 사업의 강·약점을 분리 진단해 개선 과제를 명확히 합니다.</p><div class="metric">측정 지표 · 섹션별 평균 만족도 점수</div></div>
+      <div class="expect-card"><span class="tag">조합원 관계</span><h3>의견 반영 경험으로 신뢰·충성도 향상</h3><p>결과 공개와 환류를 통해 "의견이 반영되는 조합" 이미지를 만듭니다.</p><div class="metric">측정 지표 · 조합 추천의향(NPS) 변화율</div></div>
+      <div class="expect-card"><span class="tag">미래 사업</span><h3>신규 작목·사업·복지 로드맵 근거 확보</h3><p>도입 희망 수요를 사전 파악해 계약재배·작목반 조직 설계에 반영합니다.</p><div class="metric">측정 지표 · 도입 희망 사업 Top 3</div></div>
+      <div class="expect-card"><span class="tag">거버넌스</span><h3>총회·대의원회 안건의 데이터 근거 마련</h3><p>안건의 신뢰성과 수용성을 높이고 조합원 참여를 제도화합니다.</p><div class="metric">측정 지표 · 총회 의안 채택률·참여율</div></div>
+    </div>
+  </section>
+
+  <section class="block" id="schedule">
+    <div class="block-head">
+      <span class="eyebrow">추진 일정</span>
+      <h2>조사 착수부터 결과 보고까지</h2>
+      <p class="desc">준비부터 보고까지 약 5주가 소요되는 6단계 일정입니다.</p>
+    </div>
+    <div class="timeline">
+      <div class="tstep"><div class="tnum">1</div><div class="tbody"><div class="tperiod">D-14 ~ D-8 · 준비</div><h3>설문 플랫폼 선정, 문항 최종 확정</h3><p>조사 도구를 정하고 8개 분야 문항과 보완 모듈을 최종 확정합니다.</p><div class="towner">담당 · 사무국</div></div></div>
+      <div class="tstep"><div class="tnum">2</div><div class="tbody"><div class="tperiod">D-7 · 발송</div><h3>전체 조합원 대상 개별 링크 발송</h3><p>조합원 한 분 한 분께 고유 링크를 문자로 발송하고, 협조 공문을 함께 안내합니다.</p><div class="towner">담당 · 홍보팀</div></div></div>
+      <div class="tstep"><div class="tnum">3</div><div class="tbody"><div class="tperiod">D-3 · 독려</div><h3>미응답자 리마인드 발송, 투트랙 전환 접수</h3><p>이장·작목반장을 통한 현장 참여 독려와 함께, 고령농 대상 ARS·대면조사 신청을 접수합니다.</p><div class="towner">담당 · 사무국·현장</div></div></div>
+      <div class="tstep"><div class="tnum">4</div><div class="tbody"><div class="tperiod">D+0 · 마감</div><h3>설문 마감, 데이터 추출·정제</h3><p>중도 종료·무응답·중복 응답을 제거합니다.</p><div class="towner">담당 · 분석팀</div></div></div>
+      <div class="tstep"><div class="tnum">5</div><div class="tbody"><div class="tperiod">D+7 ~ D+14 · 분석</div><h3>세그먼트 교차분석, 수요 우선순위 도출</h3><p>연령층·영농형태·경작규모·농협유형 교차분석을 포함한 보고서를 작성합니다.</p><div class="towner">담당 · 분석팀</div></div></div>
+      <div class="tstep"><div class="tnum">6</div><div class="tbody"><div class="tperiod">D+21 · 보고</div><h3>이사회 보고, 조합원 결과 공개</h3><p>뉴스레터·게시판으로 결과를 공개하고 개선 계획을 발표합니다.</p><div class="towner">담당 · 경영진</div></div></div>
+    </div>
+  </section>
+
+  <section class="block" id="closing">
+    <div class="block-head">
+      <span class="eyebrow">맺음말</span>
+      <h2>조합과 조합원이 함께 그리는 다음 5년</h2>
+    </div>
+    <div class="closing">
+      <p>이 설문조사는 단순한 만족도 조사를 넘어, 조합과 조합원이 함께 미래를 설계하는 출발점입니다. 조합원의 목소리를 정기적으로 경청하고 그 결과를 경영에 반영하는 순환 구조를 만들 때, 비로소 조합원 중심의 협동조합 가치가 실현됩니다.</p>
+      <p>이번 조사를 통해 수집된 데이터는 향후 5년간 조합 경영계획의 핵심 근거가 될 것이며, 조합원 복지 향상과 지역 농업 경쟁력 강화에 직접적으로 기여할 것입니다.</p>
+      <div class="sign">2026년 7월 · ○○농업협동조합 조합장</div>
+    </div>
+  </section>
+
+  <footer>
+    이 페이지는 시연용 데모이며, 표시된 수치와 응답 데이터는 예시입니다.
+  </footer>
+</div>
+
+<script>
+(function(){
+  "use strict";
+
+  var TOTAL_STEPS = 11; // 0=intro, 1=기본정보, 2=유형모듈, 3..9=문항섹션, 10=완료
+  var stepNames = ["안내 및 동의","기본정보","유형별 특화 모듈","전반적 만족도","신용사업 평가","경제사업 평가","복지사업 평가","도입 희망 사업·작목","도입 희망 복지","미래 비전·의견","완료"];
+
+  var state = {
+    step: 0,
+    consent: false,
+    single: {},
+    multi: { farmTypes: [], creditNeed: [], ecoFocus: [], welfareChannel: [], newBiz: [], newCrops: [], cropSupport: [], newWelfare: [] },
+    likert: {},
+    matrices: { overall: {}, credit: {}, eco: {}, welfare: {} },
+    freeText: ""
+  };
+
+  var OPTS = {
+    gender: ["남성","여성"],
+    age: ["30대 이하","40대","50대","60대","70대","80대 이상"],
+    join: ["3년 미만","3년~10년 미만","10년~20년 미만","20년 이상"],
+    farmTypes: ["논농업(벼)","밭농업(채소·과채류)","과수","축산","시설원예","특용작물·약초","비농업(준조합원 등)","기타"],
+    scale: ["1,000㎡(약 300평) 미만","1,000㎡~5,000㎡ 미만","5,000㎡~1만㎡ 미만","1만㎡~3만㎡ 미만","3만㎡ 이상"],
+
+    bestPart: ["신용(금융) 사업","농자재 공급 사업","농산물 판매·유통 사업","복지·생활 서비스","교육·정보 지원","기타"],
+    worstPart: ["신용(금융) 사업","농자재 공급 사업","농산물 판매·유통 사업","복지·생활 서비스","경영 투명성·소통","기타"],
+
+    creditFreq: ["거의 매일","주 1~2회","월 1~2회","분기에 1~2회","1년에 1~2회"],
+    creditBank: ["우리 조합(농협)","시중은행","지방은행","새마을금고·신협","우체국","기타"],
+    creditNeed: ["금리 개선(예금↑/대출↓)","모바일 앱 기능 향상","정책자금 연계 강화","창구 접근성 개선","맞춤형 금융 상담","기타"],
+    creditNonReason: ["금리가 불리해서","접근성이 불편해서","디지털 서비스가 부족해서","타 금융기관과 거래 고착","잘 몰라서","기타"],
+    linkPay: ["농협 카드/통장","타행 카드/통장","현금"],
+    linkSettle: ["예","일부","아니오"],
+
+    ecoMaterialShare: ["80% 이상","50~80%","30~50%","30% 미만"],
+    ecoSaleShare: ["80% 이상","50~80%","30~50%","30% 미만","출하하지 않음"],
+    ecoFactor: ["수매·출하 가격 인상","농자재 가격 인하","판로 다양화","수집·운송 체계 개선","계약재배·작목반 지원 강화","기타"],
+    ecoFocus: ["친환경·GAP 인증 지원","로컬푸드·직매장 확대","온라인 판매","수출 마케팅 지원","농기계 임대·공동이용","가공·6차산업화","기타"],
+    ecoNonReason: ["가격이 불리해서","품질·서비스가 미흡해서","접근성이 불편해서","개별 거래가 더 편해서","잘 몰라서","기타"],
+
+    welfareAware: ["잘 알고 있다","어느 정도 알고 있다","들어본 적은 있다","거의 모른다"],
+    welfareBest: ["장학금 지원","경조사비 지원","건강검진·의료 지원","문화·여가 지원","안전재해보험","자재 할인","기타"],
+    welfarePromo: ["충분히 잘 홍보되고 있다","홍보는 되나 복잡하다","홍보가 부족하다","접근하기 어렵다"],
+    welfareChannel: ["조합 공문·우편물","직원 직접 안내","카카오톡·문자","조합 홈페이지","이장·지도자 경유","구전(이웃·지인)","기타"],
+
+    newBiz: ["스마트팜 보급·교육","드론 방제·농작업 대행","온라인 직거래(쇼핑몰·SNS)","로컬푸드 직매장 확대","가공·6차산업화","반려동물·도시농업","농지 임대·위탁영농","태양광·에너지 절감","수출(해외시장) 연계","청년농업인 유입·육성","기타"],
+    newCrops: ["딸기","블루베리·체리 등","샤인머스캣 등 고급 포도","파프리카·컬러 피망","토마토·방울토마토","버섯류","인삼·홍삼","약초·특용작물","국화 등 화훼류","사과·배 등 과수","친환경 벼","기타"],
+    cropSupport: ["교육·재배 기술 연수","초기 자재·종자 지원","정책자금 연계·컨설팅","판로 사전 확보(계약재배)","시범 포장 운영","작목반 조직 지원","기타"],
+
+    newWelfare: ["건강관리(이동검진·한방)","노인 돌봄·생활 지원","청년농 창업 지원","여성농업인 특화 지원","장학금 확대·멘토링","자녀 결혼 지원","국내·해외 문화여행","공제(보험) 다양화","심리상담·마음건강","마을 공동체 활동 지원","반려동물 의료비 지원","기타"],
+    welfarePriority: ["의료·건강관리","노인·취약계층 돌봄","교육·장학","문화·여가","청년·후계농 지원","기타"],
+    selfPay: ["소액 자부담(1~2만원)이면 이용","좋으면 적정 비용 부담","무료여야만 이용","이용 의향 없음"],
+
+    vision5y: ["수익성 강화(배당 확대)","판로·가격 경쟁력 확보","디지털·스마트농업 전환","복지·생활서비스 강화","지역 공동체·사회적 가치","경영 투명성·거버넌스 개선","기타"],
+    communityRole: ["농업인 소득 증대 지원","지역 농업 경쟁력 강화","지역 고용·일자리 창출","취약계층·고령농 지원","로컬 먹거리·식품 안전","기타"],
+    improveNeed: ["의사소통·정보공개 강화","조합원 참여 기회 확대","사업 전문성·역량 향상","임직원 친절도·서비스","비용 절감·효율화","기타"]
+  };
+
+  var MATRIX_ITEMS = {
+    overall: [["leadership","조합장·임원의 리더십 및 경영능력"],["staff","직원의 친절도 및 전문성"],["finance","조합의 재정 건전성 및 투명성"],["comm","조합원 의견 수렴 및 소통"],["meeting","총회·대의원회 운영"],["facility","조합 시설·인프라 수준"],["pr","조합 홍보 및 정보 제공"]],
+    credit: [["rate","예·적금 금리 수준"],["loan","농업인 대출 조건 및 금리"],["policy","정책자금 연계 안내"],["digital","디지털(모바일·인터넷) 뱅킹 편의성"],["counter","창구 직원 응대 및 처리 속도"],["insurance","보험(공제) 상품 및 안내"]],
+    eco: [["price","농자재 가격 경쟁력"],["quality","농자재 품질 및 다양성"],["buy","농산물 수매·출하 가격"],["sell","농산물 판로 확보 및 유통 역량"],["apc","APC(산지유통센터) 이용 편의성"],["joint","계통 출하(공동판매) 만족도"],["online","온라인 판매·직거래 지원"]],
+    welfare: [["scholarship","조합원 장학금 지원"],["event","경조사비 지원"],["health","건강검진·의료 지원"],["culture","문화·여가 지원"],["insurance","농업인 안전재해보험 연계"],["discount","영농자재·생필품 할인"],["edu","교육·기술 연수 지원"],["vulnerable","고령·취약 조합원 지원"]]
+  };
+
+  var MODULE_Q = {
+    "도시형": [
+      {key:"m1", q:"로컬푸드 직매장 이용 빈도", type:"select", opts:["주 1회 이상","월 1~3회","거의 이용 안 함"]},
+      {key:"m2", q:"1인가구·귀농인 특화 금융상품 관심도", type:"likert"}
+    ],
+    "중산간형": [
+      {key:"m1", q:"임산물 유통지원 서비스 만족도", type:"likert"},
+      {key:"m2", q:"고령농 영농대행(방제·수확) 이용 의향", type:"select", opts:["이미 이용중","의향 있음","없음"]}
+    ],
+    "평야형": [
+      {key:"m1", q:"미곡종합처리장(RPC) 이용 만족도", type:"likert"},
+      {key:"m2", q:"대형 농기계 공동이용 서비스 수요", type:"likert"}
+    ]
+  };
+
+  var cardSectionByStep = {1:0, 2:1, 3:2, 4:3, 5:4, 6:5, 7:6, 8:7, 9:8};
+
+  function el(id){ return document.getElementById(id); }
+
+  /* ---------- field builders ---------- */
+  function chip(name, value, checked){
+    var id = name + "__c_" + value;
+    return '<div class="chip"><input type="radio" name="'+name+'" id="'+id+'" value="'+value+'"'+(checked?" checked":"")+'>'+
+      '<label for="'+id+'">'+value+'</label></div>';
+  }
+  function chipRow(name, opts, current){
+    var html = '<div class="chip-row">';
+    opts.forEach(function(v){ html += chip(name, v, current===v); });
+    return html + '</div>';
+  }
+  function chipMulti(name, value, arr, max){
+    var checked = arr.indexOf(value) !== -1;
+    var disabled = !checked && max && arr.length >= max;
+    var id = name + "__m_" + value;
+    return '<div class="chip'+(disabled?' is-disabled':'')+'"><input type="checkbox" data-group="'+name+'" id="'+id+'" value="'+value+'"'+(checked?" checked":"")+(disabled?" disabled":"")+'>'+
+      '<label for="'+id+'">'+value+'</label></div>';
+  }
+  function chipRowMulti(name, opts, max){
+    var arr = state.multi[name] || (state.multi[name] = []);
+    var html = '<div class="chip-row">';
+    opts.forEach(function(v){ html += chipMulti(name, v, arr, max); });
+    html += '</div>';
+    if (max) html += '<div class="multi-hint">최대 '+max+'개 선택 · 현재 '+arr.length+'개 선택됨</div>';
+    return html;
+  }
+  function optCard(name, value, title, sub, checked){
+    var id = name + "__o_" + value;
+    return '<div class="opt-card"><input type="radio" name="'+name+'" id="'+id+'" value="'+value+'"'+(checked?" checked":"")+'>'+
+      '<label for="'+id+'"><b>'+title+'</b><span>'+sub+'</span></label></div>';
+  }
+  function likert(name, current, lowCap, highCap){
+    var html = '<div class="likert" data-name="'+name+'">';
+    for (var v=1; v<=5; v++){
+      html += '<button type="button" class="likert-btn" data-name="'+name+'" data-val="'+v+'" aria-pressed="'+(current===v?"true":"false")+'">'+v+'</button>';
+    }
+    html += '</div><div class="likert-caps"><span>'+lowCap+'</span><span>'+highCap+'</span></div>';
+    return html;
+  }
+  function filterToggle(name, current, yesLabel, noLabel){
+    var y = current==="yes", n = current==="no";
+    return '<div class="filter-toggle">'+
+      '<button type="button" class="filter-btn" data-name="'+name+'" data-val="yes" aria-pressed="'+(y?"true":"false")+'">'+(yesLabel||"예, 이용합니다")+'</button>'+
+      '<button type="button" class="filter-btn" data-name="'+name+'" data-val="no" aria-pressed="'+(n?"true":"false")+'">'+(noLabel||"아니오")+'</button>'+
+    '</div>';
+  }
+  function matrixBlock(group, items, withNA){
+    var obj = state.matrices[group];
+    var html = '<div class="matrix">';
+    items.forEach(function(it){
+      var key = it[0], label = it[1], cur = obj[key];
+      html += '<div class="matrix-row"><div class="m-label">'+label+'</div><div class="matrix-scale">';
+      for (var v=1; v<=5; v++){
+        html += '<button type="button" class="m-btn" data-group="'+group+'" data-item="'+key+'" data-val="'+v+'" aria-pressed="'+(cur===v?"true":"false")+'">'+v+'</button>';
+      }
+      if (withNA){
+        html += '<button type="button" class="m-btn na" data-group="'+group+'" data-item="'+key+'" data-val="na" aria-pressed="'+(cur==="na"?"true":"false")+'">해당없음</button>';
+      }
+      html += '</div></div>';
+    });
+    return html + '</div>';
+  }
+  function field(label, inner){
+    return '<div class="field"><span class="field-label">'+label+'</span>'+inner+'</div>';
+  }
+  function warnCard(){
+    var pressed = state.single.arsTrack === "yes";
+    return '<div class="warn-card"><b>모바일 응답이 불편하실 수 있어요</b>관할 농협 전화(ARS) 상담 또는 직원 방문조사로도 참여하실 수 있습니다.'+
+      '<div><button type="button" class="warn-toggle" aria-pressed="'+(pressed?"true":"false")+'">'+(pressed?"전화·대면조사 신청됨 ✓":"전화·대면조사로 전환 신청")+'</button></div></div>';
+  }
+
+  /* ---------- step renderers ---------- */
+  function renderStep0(){
+    var html = '';
+    html += '<div class="screen-title">설문 참여 안내</div>';
+    html += '<div class="screen-sub">안녕하세요, ○○농업협동조합입니다</div>';
+    html += '<div class="consent-box">';
+    html += '<div class="info-row"><svg class="ico" viewBox="0 0 24 24" fill="none"><path d="M12 3l7 3v5c0 5-3.2 8.5-7 10-3.8-1.5-7-5-7-10V6l7-3Z" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/></svg><span>조합원 여러분의 의견을 바탕으로 조합 운영을 진단하고, 앞으로 5년의 사업 방향을 함께 설계하기 위한 조사입니다. 조합장 개인의 활동을 평가·홍보하는 문항은 포함되어 있지 않습니다.</span></div>';
+    html += '<div class="info-row"><svg class="ico" viewBox="0 0 24 24" fill="none"><path d="M4 6l8 6 8-6" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/><rect x="3" y="5" width="18" height="14" rx="2" stroke="currentColor" stroke-width="1.6"/></svg><span>조합원 한 분 한 분께 개별 고유 링크를 문자로 발송해 드리며, 본인만 1회 응답하실 수 있습니다. 응답 내용은 통계 목적으로만 활용되며 개인정보는 철저히 보호됩니다.</span></div>';
+    html += '<div class="info-row"><svg class="ico" viewBox="0 0 24 24" fill="none"><circle cx="12" cy="12" r="8.5" stroke="currentColor" stroke-width="1.6"/><path d="M12 7v5l3.2 2" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></svg><span>예상 소요 시간 10~15분, 8개 분야 문항으로 구성되어 있습니다.</span></div>';
+    html += '<div class="consent-check"><input type="checkbox" id="consentBox"'+(state.consent?" checked":"")+'><label for="consentBox">개인정보 수집·이용 목적(조사 응답 처리)에 동의합니다</label></div>';
+    html += '</div>';
+    return html;
+  }
+
+  function renderSection1(){
+    var html = '<div class="screen-title">응답자 기본정보</div><div class="screen-sub">통계 분류와 세그먼트 교차분석 목적으로만 활용됩니다</div>';
+    html += field("성별", chipRow("gender", OPTS.gender, state.single.gender));
+    html += field("연령대", chipRow("age", OPTS.age, state.single.age));
+    if (state.single.age === "70대" || state.single.age === "80대 이상"){
+      html += warnCard();
+    }
+    html += field("조합원 가입 기간", chipRow("join", OPTS.join, state.single.join));
+    html += field("주요 영농 형태 (복수 선택 가능)", chipRowMulti("farmTypes", OPTS.farmTypes, 0));
+    html += field("경작 규모 (논·밭 합산)", chipRow("scale", OPTS.scale, state.single.scale));
+    html += field("소속 농협 유형", '<div class="select-row">'+
+      optCard("npType","도시형","도시형","겸업·귀농·1인가구 비중이 높은 지역", state.single.npType==="도시형")+
+      optCard("npType","중산간형","중산간형","임산물·고령농 비중이 높은 지역", state.single.npType==="중산간형")+
+      optCard("npType","평야형","평야형","대규모 경작·미곡 중심 지역", state.single.npType==="평야형")+
+      '</div>');
+    html += '<p class="field-hint">연령층 × 영농형태 × 경작규모 × 농협유형을 교차분석 키로 사용해, 이후 모든 만족도·수요 문항을 세그먼트별로 나누어 볼 수 있습니다.</p>';
+    return html;
+  }
+
+  function renderTypeModule(){
+    var type = state.single.npType || "도시형";
+    var tagClass = type==="도시형"?"city":(type==="중산간형"?"hill":"plain");
+    var qs = MODULE_Q[type];
+    var html = '';
+    html += '<span class="module-tag '+tagClass+'">'+type+' 맞춤 모듈</span>';
+    html += '<div class="screen-title">'+type+' 조합원 맞춤 문항</div>';
+    html += '<div class="screen-sub">앞서 선택하신 농협 유형에 따라 자동으로 구성된 부가 문항입니다</div>';
+    qs.forEach(function(item){
+      var name = "mod_" + item.key;
+      if (item.type === "select"){
+        html += field(item.q, chipRow(name, item.opts, state.single[name]));
+      } else {
+        html += field(item.q, likert(name, state.likert[name], "매우 낮음", "매우 높음"));
+      }
+    });
+    return html;
+  }
+
+  function renderSection2(){
+    var html = '<div class="screen-title">조합 전반적 만족도</div><div class="screen-sub">현재 조합 운영 전반에 대해 평가해 주세요</div>';
+    html += field("조합 운영 전반 만족도", likert("overallSat", state.likert.overallSat, "매우 불만족", "매우 만족"));
+    html += field("세부 항목별 만족도", matrixBlock("overall", MATRIX_ITEMS.overall, false));
+    html += field("가장 잘 운영되고 있다고 생각하는 부문", chipRow("bestPart", OPTS.bestPart, state.single.bestPart));
+    html += field("가장 시급히 개선해야 할 부문", chipRow("worstPart", OPTS.worstPart, state.single.worstPart));
+    html += field("조합을 지인에게 추천하시겠습니까? (NPS)", likert("nps", state.likert.nps, "절대 추천 안함", "적극 추천"));
+    return html;
+  }
+
+  function renderSection3(){
+    var html = '<div class="screen-title">신용사업 평가</div><div class="screen-sub">예·적금, 대출, 카드, 공제 등을 이용하고 계십니까?</div>';
+    html += field("신용사업 이용 여부", filterToggle("creditUse", state.single.creditUse));
+    if (state.single.creditUse === "yes"){
+      html += field("이용 빈도", chipRow("creditFreq", OPTS.creditFreq, state.single.creditFreq));
+      html += field("신용사업 전반 만족도", likert("creditSat", state.likert.creditSat, "매우 불만족", "매우 만족"));
+      html += field("항목별 만족도", matrixBlock("credit", MATRIX_ITEMS.credit, true));
+      html += field("주로 거래하는 금융기관 (1순위)", chipRow("creditBank", OPTS.creditBank, state.single.creditBank));
+      html += field("더 이용하기 위해 필요한 것 (최대 2개)", chipRowMulti("creditNeed", OPTS.creditNeed, 2));
+    } else if (state.single.creditUse === "no"){
+      html += field("이용하지 않는 주요 이유", chipRow("creditNonReason", OPTS.creditNonReason, state.single.creditNonReason));
+    } else {
+      html += '<p class="field-hint">이용 여부를 먼저 선택해 주세요.</p>';
+    }
+    html += '<span class="module-tag hill">신용·경제 연계 (검토의견 2 반영 신설문항)</span>';
+    html += field("경제사업(하나로마트·영농자재 등) 대금 결제 시 주로 쓰는 수단", chipRow("linkPay", OPTS.linkPay, state.single.linkPay));
+    html += field("농산물 판매대금 정산계좌를 조합으로 지정하고 계십니까?", chipRow("linkSettle", OPTS.linkSettle, state.single.linkSettle));
+    if (state.single.linkSettle === "일부" || state.single.linkSettle === "아니오"){
+      html += field("정산계좌를 조합으로 지정하지 않는 주된 이유", chipRow("linkReason", OPTS.creditNonReason, state.single.linkReason));
+    }
+    return html;
+  }
+
+  function renderSection4(){
+    var html = '<div class="screen-title">경제사업 평가</div><div class="screen-sub">농자재 구매, 농산물 출하·판매 등을 이용하고 계십니까?</div>';
+    html += field("경제사업 이용 여부", filterToggle("ecoUse", state.single.ecoUse));
+    if (state.single.ecoUse === "yes"){
+      html += field("경제사업 전반 만족도", likert("ecoSat", state.likert.ecoSat, "매우 불만족", "매우 만족"));
+      html += field("항목별 만족도", matrixBlock("eco", MATRIX_ITEMS.eco, true));
+      html += field("농자재 구매 시 조합 이용 비중", chipRow("ecoMaterialShare", OPTS.ecoMaterialShare, state.single.ecoMaterialShare));
+      html += field("농산물 출하 시 조합 이용 비중", chipRow("ecoSaleShare", OPTS.ecoSaleShare, state.single.ecoSaleShare));
+      html += field("이용도를 높이는 데 가장 중요한 요인 (1순위)", chipRow("ecoFactor", OPTS.ecoFactor, state.single.ecoFactor));
+      html += field("우선 강화해야 할 분야 (최대 2개)", chipRowMulti("ecoFocus", OPTS.ecoFocus, 2));
+    } else if (state.single.ecoUse === "no"){
+      html += field("이용하지 않는 주요 이유", chipRow("ecoNonReason", OPTS.ecoNonReason, state.single.ecoNonReason));
+    } else {
+      html += '<p class="field-hint">이용 여부를 먼저 선택해 주세요.</p>';
+    }
+    return html;
+  }
+
+  function renderSection5(){
+    var html = '<div class="screen-title">복지사업 평가</div><div class="screen-sub">조합에서 제공하는 복지사업에 대해 알려주세요</div>';
+    html += field("복지사업 인지도", chipRow("welfareAware", OPTS.welfareAware, state.single.welfareAware));
+    html += field("복지사업 전반 만족도", likert("welfareSat", state.likert.welfareSat, "매우 불만족", "매우 만족"));
+    html += field("항목별 만족도", matrixBlock("welfare", MATRIX_ITEMS.welfare, true));
+    html += field("가장 만족스러운 항목 (1순위)", chipRow("welfareBest", OPTS.welfareBest, state.single.welfareBest));
+    html += field("복지사업 안내·홍보 방식 평가", chipRow("welfarePromo", OPTS.welfarePromo, state.single.welfarePromo));
+    html += field("복지사업 정보를 주로 접하는 경로 (복수 선택)", chipRowMulti("welfareChannel", OPTS.welfareChannel, 0));
+    return html;
+  }
+
+  function renderSection6(){
+    var html = '<div class="screen-title">도입 희망 사업·작목</div><div class="screen-sub">새로 도입되면 좋겠다고 생각하는 것을 알려주세요</div>';
+    html += field("도입·강화를 희망하는 신규 사업 분야 (최대 3개)", chipRowMulti("newBiz", OPTS.newBiz, 3));
+    html += field("지원이 있다면 도전해 보고 싶은 작목이 있습니까?", filterToggle("newCropTry", state.single.newCropTry, "예, 있습니다", "아니오, 없습니다"));
+    if (state.single.newCropTry === "yes"){
+      html += field("도입해 보고 싶은 작목 (최대 3개)", chipRowMulti("newCrops", OPTS.newCrops, 3));
+      html += field("작목 재배를 위해 조합에 요청하고 싶은 지원 (최대 2개)", chipRowMulti("cropSupport", OPTS.cropSupport, 2));
+    } else if (state.single.newCropTry === "no"){
+      html += '<p class="field-hint">현재는 새로운 작목 도전 의향이 없으신 것으로 기록됩니다.</p>';
+    }
+    return html;
+  }
+
+  function renderSection7(){
+    var html = '<div class="screen-title">도입 희망 복지·서비스</div><div class="screen-sub">확대되었으면 하는 복지 서비스를 알려주세요</div>';
+    html += field("새로 도입·확대를 바라는 복지·서비스 (최대 3개)", chipRowMulti("newWelfare", OPTS.newWelfare, 3));
+    html += field("복지 예산 우선 투자 분야 (1순위)", chipRow("welfarePriority", OPTS.welfarePriority, state.single.welfarePriority));
+    html += field("일부 자부담이 발생하더라도 이용하시겠습니까?", chipRow("selfPay", OPTS.selfPay, state.single.selfPay));
+    return html;
+  }
+
+  function renderSection8(){
+    var html = '<div class="screen-title">미래 비전 및 자유의견</div><div class="screen-sub">마지막으로, 조합의 미래에 대한 생각을 들려주세요</div>';
+    html += field("향후 5년간 조합이 가장 집중해야 할 방향 (1순위)", chipRow("vision5y", OPTS.vision5y, state.single.vision5y));
+    html += field("조합이 지역사회에서 맡아야 할 가장 중요한 역할 (1순위)", chipRow("communityRole", OPTS.communityRole, state.single.communityRole));
+    html += field("조합 운영에서 가장 개선이 필요한 사항 (1순위)", chipRow("improveNeed", OPTS.improveNeed, state.single.improveNeed));
+    html += field("조합의 현재 사업 방향이 조합원의 실제 필요와 일치하는 정도", likert("matchLevel", state.likert.matchLevel, "전혀 일치 않음", "매우 잘 일치"));
+    html += field("조합 발전을 위한 자유로운 의견 (선택)", '<textarea class="freeform" id="freeTextArea" placeholder="건의하고 싶은 내용을 자유롭게 적어주세요">'+state.freeText+'</textarea>');
+    return html;
+  }
+
+  function renderDone(){
+    var html = '<div class="screen-title">응답이 접수되었습니다</div><div class="screen-sub">소중한 시간을 내어 응답해 주셔서 진심으로 감사드립니다</div>';
+    html += '<div class="done-summary">';
+    if (state.single.age) html += '<span class="pill">'+state.single.age+'</span>';
+    if (state.single.npType) html += '<span class="pill">'+state.single.npType+'</span>';
+    if (state.multi.farmTypes.length) html += '<span class="pill">'+state.multi.farmTypes[0]+(state.multi.farmTypes.length>1?" 외 "+(state.multi.farmTypes.length-1)+"건":"")+'</span>';
+    if (state.single.scale) html += '<span class="pill">'+state.single.scale+'</span>';
+    html += '</div>';
+    html += '<p style="font-size:0.82rem;color:var(--text-secondary)">응답 내용은 다른 조합원 응답과 함께 세그먼트별로 교차분석되어, 향후 5년간 조합 경영계획의 근거 자료로 활용됩니다. 문의사항은 ○○농업협동조합으로 연락 주십시오.</p>';
+    return html;
+  }
+
+  var renderers = [renderStep0, renderSection1, renderTypeModule, renderSection2, renderSection3, renderSection4, renderSection5, renderSection6, renderSection7, renderSection8, renderDone];
+
+  function stepValid(){
+    var s = state.single, m = state.multi, lk = state.likert;
+    switch(state.step){
+      case 0: return state.consent;
+      case 1: return !!(s.gender && s.age && s.join && m.farmTypes.length>0 && s.scale && s.npType);
+      case 2:
+        var type = s.npType || "도시형";
+        return MODULE_Q[type].every(function(it){
+          return it.type === "likert" ? !!lk["mod_"+it.key] : !!s["mod_"+it.key];
+        });
+      case 3: return !!lk.overallSat && s.bestPart && s.worstPart && !!lk.nps;
+      case 4:
+        if (s.creditUse === "yes") return !!(s.creditFreq && lk.creditSat && s.creditBank);
+        if (s.creditUse === "no") return !!s.creditNonReason;
+        return false;
+      case 5:
+        if (s.ecoUse === "yes") return !!(lk.ecoSat && s.ecoMaterialShare && s.ecoSaleShare);
+        if (s.ecoUse === "no") return !!s.ecoNonReason;
+        return false;
+      case 6: return !!(s.welfareAware && lk.welfareSat && s.welfareBest);
+      case 7:
+        if (m.newBiz.length===0) return false;
+        if (s.newCropTry === "yes") return m.newCrops.length>0;
+        return s.newCropTry === "no";
+      case 8: return !!(m.newWelfare.length>0 && s.welfarePriority && s.selfPay);
+      case 9: return !!(s.vision5y && s.communityRole && s.improveNeed && lk.matchLevel);
+      default: return true;
+    }
+  }
+
+  function render(){
+    el("screenBody").innerHTML = renderers[state.step]();
+    el("progressFill").style.width = (state.step/(TOTAL_STEPS-1)*100) + "%";
+    el("stepLabel").textContent = (state.step+1)+" / "+TOTAL_STEPS+" · "+stepNames[state.step];
+
+    var nav = "";
+    if (state.step === TOTAL_STEPS-1){
+      nav = '<button type="button" class="btn primary" id="restartBtn">처음부터 다시 보기</button>';
+    } else {
+      nav += '<button type="button" class="btn ghost" id="backBtn"'+(state.step===0?" disabled":"")+'>이전</button>';
+      var label = state.step===TOTAL_STEPS-2 ? "제출하기" : "다음";
+      nav += '<button type="button" class="btn primary" id="nextBtn"'+(stepValid()?"":" disabled")+'>'+label+'</button>';
+    }
+    el("screenNav").innerHTML = nav;
+
+    updateRail();
+    bindEvents();
+  }
+
+  function updateRail(){
+    var activeSection = cardSectionByStep.hasOwnProperty(state.step) ? cardSectionByStep[state.step] : -1;
+    document.querySelectorAll(".rail-card").forEach(function(card){
+      var n = parseInt(card.getAttribute("data-section"), 10);
+      card.classList.toggle("is-active", n === activeSection);
+    });
+  }
+
+  function bindEvents(){
+    var body = el("screenBody");
+
+    body.querySelectorAll('input[type="radio"]').forEach(function(inp){
+      inp.addEventListener("change", function(){
+        state.single[inp.name] = inp.value;
+        render();
+      });
+    });
+
+    body.querySelectorAll('input[type="checkbox"][data-group]').forEach(function(inp){
+      inp.addEventListener("change", function(){
+        var g = inp.getAttribute("data-group");
+        var arr = state.multi[g] || (state.multi[g] = []);
+        var v = inp.value, idx = arr.indexOf(v);
+        if (inp.checked){ if (idx===-1) arr.push(v); }
+        else { if (idx!==-1) arr.splice(idx,1); }
+        render();
+      });
+    });
+
+    body.querySelectorAll(".likert-btn").forEach(function(btn){
+      btn.addEventListener("click", function(){
+        state.likert[btn.getAttribute("data-name")] = parseInt(btn.getAttribute("data-val"), 10);
+        render();
+      });
+    });
+
+    body.querySelectorAll(".m-btn").forEach(function(btn){
+      btn.addEventListener("click", function(){
+        var g = btn.getAttribute("data-group"), it = btn.getAttribute("data-item"), val = btn.getAttribute("data-val");
+        state.matrices[g][it] = (val === "na") ? "na" : parseInt(val, 10);
+        render();
+      });
+    });
+
+    body.querySelectorAll(".filter-btn").forEach(function(btn){
+      btn.addEventListener("click", function(){
+        state.single[btn.getAttribute("data-name")] = btn.getAttribute("data-val");
+        render();
+      });
+    });
+
+    body.querySelectorAll(".warn-toggle").forEach(function(btn){
+      btn.addEventListener("click", function(){
+        state.single.arsTrack = (state.single.arsTrack === "yes") ? null : "yes";
+        render();
+      });
+    });
+
+    var consentBox = el("consentBox");
+    if (consentBox){
+      consentBox.addEventListener("change", function(){
+        state.consent = consentBox.checked;
+        render();
+      });
+    }
+
+    var freeTextArea = el("freeTextArea");
+    if (freeTextArea){
+      freeTextArea.addEventListener("input", function(){
+        state.freeText = freeTextArea.value;
+      });
+    }
+
+    var backBtn = el("backBtn");
+    if (backBtn) backBtn.addEventListener("click", function(){
+      if (state.step > 0){ state.step -= 1; render(); }
+    });
+
+    var nextBtn = el("nextBtn");
+    if (nextBtn) nextBtn.addEventListener("click", function(){
+      if (stepValid() && state.step < TOTAL_STEPS-1){ state.step += 1; render(); }
+    });
+
+    var restartBtn = el("restartBtn");
+    if (restartBtn) restartBtn.addEventListener("click", function(){
+      state = {
+        step:0, consent:false, single:{},
+        multi:{ farmTypes:[], creditNeed:[], ecoFocus:[], welfareChannel:[], newBiz:[], newCrops:[], cropSupport:[], newWelfare:[] },
+        likert:{}, matrices:{ overall:{}, credit:{}, eco:{}, welfare:{} }, freeText:""
+      };
+      render();
+    });
+  }
+
+  function renderChart(){
+    var cats = ["조합 전반","신용사업","경제사업","복지사업"];
+    var under60 = [3.6, 3.5, 3.7, 3.3];
+    var over60  = [3.9, 4.1, 3.8, 4.0];
+    var max = 5;
+    var html = "";
+    cats.forEach(function(label, i){
+      html += '<div class="chart-group">';
+      html += '<div class="chart-bar" style="height:'+(under60[i]/max*100).toFixed(1)+'%; background:var(--series-1)"><span class="val">'+under60[i].toFixed(1)+'</span></div>';
+      html += '<div class="chart-bar" style="height:'+(over60[i]/max*100).toFixed(1)+'%; background:var(--series-2)"><span class="val">'+over60[i].toFixed(1)+'</span></div>';
+      html += '</div>';
+    });
+    el("chartArea").innerHTML = html;
+  }
+
+  render();
+  renderChart();
+})();
+</script>
