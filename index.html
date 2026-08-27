@@ -298,7 +298,7 @@
   .matrix-scale{display:flex; gap:5px;}
   .m-btn{flex:1; height:30px; border-radius:8px; border:1px solid var(--line-strong); background:var(--surface); color:var(--text-secondary); font-size:0.72rem; font-weight:700; cursor:pointer;}
   .m-btn[aria-pressed="true"]{background:var(--accent); border-color:var(--accent); color:#fff;}
-  .m-btn.na{flex:1.5; font-size:0.62rem;}
+  .m-btn.na{flex:2.2; font-size:0.62rem;}
 
   .multi-hint{font-size:0.68rem; color:var(--text-muted); margin-top:7px;}
 
@@ -480,11 +480,52 @@
 
   .fs-exit{
     display:none; align-items:center; justify-content:center;
-    width:26px; height:26px; border-radius:50%;
+    width:32px; height:32px; border-radius:50%;
     border:1px solid var(--line-strong); background:var(--surface);
-    color:var(--text-secondary); font-size:0.8rem; line-height:1; cursor:pointer;
+    color:var(--text-secondary); font-size:0.9rem; line-height:1; cursor:pointer;
   }
   body.fs-demo .fs-exit{ display:inline-flex; }
+
+  /* ---------- Large, elderly-friendly type inside the fullscreen demo ---------- */
+  body.fs-demo .screen-body{ padding:22px 20px 20px; }
+  body.fs-demo .screen-title{ font-size:1.5rem; line-height:1.35; margin-bottom:8px; }
+  body.fs-demo .screen-sub{ font-size:1.05rem; margin-bottom:26px; }
+  body.fs-demo .step-label{ font-size:0.86rem; }
+  body.fs-demo .field{ margin-bottom:30px; }
+  body.fs-demo .field-label{ font-size:1.1rem; margin-bottom:14px; }
+  body.fs-demo .field-hint{ font-size:0.92rem; }
+  body.fs-demo .chip-row{ gap:10px; }
+  body.fs-demo .chip label{ font-size:1.08rem; padding:14px 20px; border-radius:14px; }
+  body.fs-demo .select-row{ gap:2px; }
+  body.fs-demo .opt-card label{ padding:16px 18px; border-radius:14px; margin-bottom:10px; }
+  body.fs-demo .opt-card label b{ font-size:1.1rem; }
+  body.fs-demo .opt-card label span{ font-size:0.92rem; }
+  body.fs-demo .likert{ gap:8px; }
+  body.fs-demo .likert-btn{ font-size:1.1rem; padding:15px 0; border-radius:12px; }
+  body.fs-demo .likert-caps{ font-size:0.86rem; margin-top:8px; }
+  body.fs-demo .filter-toggle{ gap:12px; }
+  body.fs-demo .filter-btn{ font-size:1.12rem; padding:19px 10px; border-radius:16px; }
+  body.fs-demo .matrix{ border-radius:14px; }
+  body.fs-demo .matrix-row{ padding:16px 14px; }
+  body.fs-demo .matrix-row .m-label{ font-size:1.02rem; margin-bottom:12px; }
+  body.fs-demo .matrix-scale{ gap:6px; }
+  body.fs-demo .m-btn{ font-size:0.92rem; height:42px; border-radius:10px; }
+  body.fs-demo .m-btn.na{ font-size:0.8rem; white-space:nowrap; }
+  body.fs-demo .multi-hint{ font-size:0.86rem; margin-top:10px; }
+  body.fs-demo .freeform{ font-size:1.05rem; min-height:120px; padding:14px; }
+  body.fs-demo .consent-box{ padding:18px; }
+  body.fs-demo .info-row{ font-size:0.98rem; gap:12px; margin-bottom:16px; }
+  body.fs-demo .info-row .ico{ width:24px; height:24px; }
+  body.fs-demo .consent-check{ padding-top:14px; }
+  body.fs-demo .consent-check label{ font-size:1.05rem; }
+  body.fs-demo .warn-card{ font-size:0.98rem; padding:16px 16px; margin-bottom:22px; }
+  body.fs-demo .warn-card b{ font-size:1.05rem; margin-bottom:6px; }
+  body.fs-demo .warn-card .warn-toggle{ font-size:0.9rem; padding:9px 16px; margin-top:10px; }
+  body.fs-demo .module-tag{ font-size:0.84rem; padding:7px 14px; margin-bottom:16px; }
+  body.fs-demo .done-summary{ gap:8px; margin:18px 0; }
+  body.fs-demo .done-summary .pill{ font-size:0.92rem; padding:8px 15px; }
+  body.fs-demo .screen-nav{ padding:16px 20px 24px; gap:12px; }
+  body.fs-demo .btn{ font-size:1.1rem; padding:16px 0; border-radius:14px; }
 </style>
 
 <div class="topbar">
