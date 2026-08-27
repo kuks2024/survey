@@ -1,3 +1,5 @@
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <title>조합원 동행 시스템</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -476,6 +478,8 @@
     border-radius:0; border:none; box-shadow:none; background:var(--bg);
   }
   body.fs-demo #demo .phone-screen{ height:100vh; height:100dvh; border-radius:0; }
+  body.fs-demo #demo .phone-status{ padding-top:max(12px, env(safe-area-inset-top)); }
+  body.fs-demo #demo .screen-nav{ padding-bottom:max(18px, env(safe-area-inset-bottom)); }
   body.fs-demo footer{ display:none; }
 
   .fs-exit{
@@ -1150,6 +1154,7 @@
 
   function render(){
     el("screenBody").innerHTML = renderers[state.step]();
+    el("screenBody").scrollTop = 0;
     el("progressFill").style.width = (state.step/(TOTAL_STEPS-1)*100) + "%";
     el("stepLabel").textContent = (state.step+1)+" / "+TOTAL_STEPS+" · "+stepNames[state.step];
 
