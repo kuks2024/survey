@@ -447,23 +447,44 @@
     text-align:center; font-size:0.76rem; color:var(--text-muted);
   }
 
-  /* ---------- Mobile takeover: only the survey, fullscreen ---------- */
-  @media (max-width: 720px){
-    .topbar{ display:none; }
-    .wrap{ padding:0; max-width:none; }
-    .wrap > section.block{ display:none; }
-    .wrap > section.block#demo{ display:block; padding:0; }
-    #demo .block-head{ display:none; }
-    #demo .workspace{ display:block; gap:0; }
-    #demo .rail{ display:none; }
-    #demo .phone{
-      position:fixed; inset:0; z-index:20;
-      width:auto; max-width:none; margin:0; padding:0;
-      border-radius:0; border:none; box-shadow:none; background:var(--bg);
-    }
-    #demo .phone-screen{ height:100vh; height:100dvh; border-radius:0; }
-    footer{ display:none; }
+  /* ---------- Demo trigger heading ---------- */
+  .demo-trigger-row{ display:flex; align-items:center; gap:12px; flex-wrap:wrap; }
+  .demo-trigger{
+    cursor:pointer; user-select:none; border-radius:8px;
+    transition:color .15s ease;
   }
+  .demo-trigger:hover{ color:var(--accent-strong); }
+  .trigger-hint{
+    display:inline-flex; align-items:center; gap:6px;
+    font-size:0.72rem; font-weight:800; letter-spacing:0.01em;
+    color:var(--accent-strong); background:var(--accent-soft);
+    padding:6px 12px; border-radius:999px; white-space:nowrap;
+  }
+
+  /* ---------- Fullscreen demo takeover (triggered by click, any viewport) ---------- */
+  body.fs-demo{ overflow:hidden; }
+  body.fs-demo .topbar{ display:none; }
+  body.fs-demo .wrap{ padding:0; max-width:none; }
+  body.fs-demo .wrap > section.block{ display:none; }
+  body.fs-demo .wrap > section.block#demo{ display:block; padding:0; }
+  body.fs-demo #demo .block-head{ display:none; }
+  body.fs-demo #demo .workspace{ display:block; gap:0; }
+  body.fs-demo #demo .rail{ display:none; }
+  body.fs-demo #demo .phone{
+    position:fixed; inset:0; z-index:50;
+    width:auto; max-width:none; margin:0; padding:0;
+    border-radius:0; border:none; box-shadow:none; background:var(--bg);
+  }
+  body.fs-demo #demo .phone-screen{ height:100vh; height:100dvh; border-radius:0; }
+  body.fs-demo footer{ display:none; }
+
+  .fs-exit{
+    display:none; align-items:center; justify-content:center;
+    width:26px; height:26px; border-radius:50%;
+    border:1px solid var(--line-strong); background:var(--surface);
+    color:var(--text-secondary); font-size:0.8rem; line-height:1; cursor:pointer;
+  }
+  body.fs-demo .fs-exit{ display:inline-flex; }
 </style>
 
 <div class="topbar">
@@ -499,8 +520,11 @@
   <section class="block" id="demo">
     <div class="block-head">
       <span class="eyebrow">Interactive Demo</span>
-      <h2>모바일 설문 미리보기</h2>
-      <p class="desc">왼쪽 화면을 직접 눌러 조합원 응답 흐름을 체험해 보세요. 오른쪽 목록은 원안 43문항에 세그먼트·연계·유형별 모듈 보완 문항이 어떻게 배치되어 있는지, 지금 어느 구간을 보고 있는지 실시간으로 보여줍니다.</p>
+      <div class="demo-trigger-row">
+        <h2 class="demo-trigger" id="demoTrigger" role="button" tabindex="0">모바일 설문 미리보기</h2>
+        <span class="trigger-hint">눌러서 전체화면으로 체험하기 ▶</span>
+      </div>
+      <p class="desc">제목을 누르면 이 설문만 화면 전체를 채운 상태로 바로 체험할 수 있습니다. 아래 목록은 원안 43문항에 세그먼트·연계·유형별 모듈 보완 문항이 어떻게 배치되어 있는지, 지금 어느 구간을 보고 있는지 실시간으로 보여줍니다.</p>
     </div>
 
     <div class="workspace">
@@ -508,7 +532,10 @@
         <div class="phone-screen">
           <div class="phone-status">
             <span>9:41</span>
-            <span class="demo-badge">시연용 프로토타입</span>
+            <div style="display:flex; align-items:center; gap:8px;">
+              <span class="demo-badge">시연용 프로토타입</span>
+              <button type="button" id="exitFsBtn" class="fs-exit" aria-label="전체화면 나가기">✕</button>
+            </div>
           </div>
           <div class="phone-brand-row">
             <span class="dot"></span>
@@ -1206,6 +1233,32 @@
       html += '</div>';
     });
     el("chartArea").innerHTML = html;
+  }
+
+  function enterFullscreenDemo(){
+    document.body.classList.add("fs-demo");
+    window.scrollTo(0, 0);
+  }
+  function exitFullscreenDemo(){
+    document.body.classList.remove("fs-demo");
+  }
+
+  var demoTrigger = el("demoTrigger");
+  if (demoTrigger){
+    demoTrigger.addEventListener("click", enterFullscreenDemo);
+    demoTrigger.addEventListener("keydown", function(e){
+      if (e.key === "Enter" || e.key === " "){
+        e.preventDefault();
+        enterFullscreenDemo();
+      }
+    });
+  }
+  var exitFsBtn = el("exitFsBtn");
+  if (exitFsBtn){
+    exitFsBtn.addEventListener("click", function(e){
+      e.stopPropagation();
+      exitFullscreenDemo();
+    });
   }
 
   render();
