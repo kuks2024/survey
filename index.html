@@ -1152,9 +1152,12 @@
     }
   }
 
+  var lastRenderedStep = -1;
   function render(){
+    var stepChanged = (state.step !== lastRenderedStep);
     el("screenBody").innerHTML = renderers[state.step]();
-    el("screenBody").scrollTop = 0;
+    if (stepChanged) el("screenBody").scrollTop = 0;
+    lastRenderedStep = state.step;
     el("progressFill").style.width = (state.step/(TOTAL_STEPS-1)*100) + "%";
     el("stepLabel").textContent = (state.step+1)+" / "+TOTAL_STEPS+" · "+stepNames[state.step];
 
