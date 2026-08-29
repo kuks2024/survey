@@ -304,6 +304,188 @@
 
   .multi-hint{font-size:0.68rem; color:var(--text-muted); margin-top:7px;}
 
+  /* ---------- 100선 사업 아이디어 뱅크 (아코디언) ---------- */
+  .bank-summary{
+    display:flex; align-items:center; justify-content:space-between; gap:10px;
+    background:var(--accent-soft); border:1px solid var(--accent);
+    border-radius:12px; padding:10px 13px; margin-bottom:12px;
+  }
+  .bank-summary .bs-label{font-size:0.72rem; font-weight:700; color:var(--accent-strong);}
+  .bank-summary .bs-count{font-size:0.95rem; font-weight:800; color:var(--accent-strong); white-space:nowrap;}
+  .idea-cat{border:1px solid var(--line-strong); border-radius:12px; margin-bottom:8px; overflow:hidden; background:var(--surface);}
+  .idea-cat.is-open{border-color:var(--accent);}
+  .idea-cat-head{
+    width:100%; display:flex; align-items:center; gap:9px; text-align:left;
+    padding:11px 12px; background:transparent; border:none; cursor:pointer;
+    font-family:inherit; color:var(--text);
+  }
+  .idea-cat.is-open .idea-cat-head{background:var(--surface-alt);}
+  .idea-cat-num{
+    flex:none; width:22px; height:22px; border-radius:7px; background:var(--surface-sunken);
+    color:var(--text-secondary); font-size:0.68rem; font-weight:800;
+    display:flex; align-items:center; justify-content:center;
+  }
+  .idea-cat.is-open .idea-cat-num{background:var(--accent); color:#fff;}
+  .idea-cat-name{flex:1; font-size:0.8rem; font-weight:700; line-height:1.35;}
+  .idea-cat-meta{flex:none; display:flex; align-items:center; gap:6px;}
+  .idea-cat-badge{
+    font-size:0.62rem; font-weight:800; padding:3px 8px; border-radius:999px;
+    background:var(--surface-sunken); color:var(--text-muted); white-space:nowrap;
+  }
+  .idea-cat-badge.has-sel{background:var(--accent); color:#fff;}
+  .idea-chev{flex:none; font-size:0.6rem; color:var(--text-muted); transition:transform .18s ease;}
+  .idea-cat.is-open .idea-chev{transform:rotate(180deg); color:var(--accent);}
+  .idea-cat-body{padding:4px 10px 11px; border-top:1px solid var(--line);}
+  .idea-card{position:relative; margin-top:7px;}
+  .idea-card input{position:absolute; opacity:0; width:1px; height:1px;}
+  .idea-card label{
+    display:block; cursor:pointer; padding:9px 11px 10px 32px; border-radius:10px;
+    border:1px solid var(--line-strong); background:var(--surface);
+    transition:border-color .15s ease, background .15s ease;
+  }
+  .idea-card label:before{
+    content:""; position:absolute; left:10px; top:11px;
+    width:15px; height:15px; border-radius:5px;
+    border:1.5px solid var(--line-strong); background:var(--surface);
+  }
+  .idea-card input:checked + label{border-color:var(--accent); background:var(--accent-soft);}
+  .idea-card input:checked + label:before{background:var(--accent); border-color:var(--accent);}
+  .idea-card input:checked + label:after{
+    content:""; position:absolute; left:14px; top:14px;
+    width:5px; height:9px; border:solid #fff; border-width:0 2px 2px 0; transform:rotate(42deg);
+  }
+  .idea-card input:disabled + label{opacity:0.42;}
+  .idea-card input:focus-visible + label{outline:2px solid var(--accent); outline-offset:2px;}
+  .idea-card .ic-no{font-size:0.6rem; font-weight:800; color:var(--text-muted); letter-spacing:0.04em;}
+  .idea-card input:checked + label .ic-no{color:var(--accent-strong);}
+  .idea-card .ic-name{display:block; font-size:0.79rem; font-weight:700; line-height:1.35; margin:1px 0 3px;}
+  .idea-card .ic-desc{display:block; font-size:0.68rem; color:var(--text-muted); line-height:1.45;}
+  .picked-row{display:flex; flex-direction:column; gap:0;}
+
+  /* ---------- 문항 뱅크 스펙 (랜딩) ---------- */
+  .scale-banner{
+    display:grid; grid-template-columns:repeat(4,1fr); gap:14px; margin-bottom:22px;
+  }
+  @media (max-width:760px){ .scale-banner{grid-template-columns:repeat(2,1fr);} }
+  .scale-stat{
+    background:var(--surface); border:1px solid var(--line-strong); border-radius:14px;
+    padding:16px 14px; box-shadow:var(--shadow);
+  }
+  .scale-stat .ss-num{font-size:1.6rem; font-weight:800; color:var(--accent-strong); line-height:1.1;}
+  .scale-stat .ss-label{font-size:0.74rem; color:var(--text-secondary); margin-top:4px; line-height:1.4;}
+  .bank-grid{display:grid; grid-template-columns:repeat(2,1fr); gap:12px;}
+  @media (max-width:760px){ .bank-grid{grid-template-columns:1fr;} }
+  .bank-card{
+    background:var(--surface); border:1px solid var(--line-strong); border-radius:14px;
+    padding:15px 16px; display:flex; gap:12px; align-items:flex-start;
+  }
+  .bank-card .bc-num{
+    flex:none; width:30px; height:30px; border-radius:9px; background:var(--accent-soft);
+    color:var(--accent-strong); font-size:0.8rem; font-weight:800;
+    display:flex; align-items:center; justify-content:center;
+  }
+  .bank-card .bc-body{flex:1; min-width:0;}
+  .bank-card h3{font-size:0.88rem; font-weight:800; margin-bottom:3px;}
+  .bank-card p{font-size:0.74rem; color:var(--text-muted); line-height:1.5;}
+  .bank-card .bc-count{
+    flex:none; font-size:0.66rem; font-weight:800; color:var(--accent-strong);
+    background:var(--accent-soft); border-radius:999px; padding:4px 9px; white-space:nowrap;
+  }
+  .bank-note{
+    margin-top:16px; padding:14px 16px; border-radius:12px;
+    background:var(--surface-alt); border:1px solid var(--line);
+    font-size:0.78rem; color:var(--text-secondary); line-height:1.6;
+  }
+  .bank-note b{color:var(--text);}
+
+  /* ---------- 실시간 응답 현황 대시보드 ---------- */
+  .live-head{display:flex; align-items:center; gap:10px; flex-wrap:wrap; margin-bottom:4px;}
+  .live-badge{
+    display:inline-flex; align-items:center; gap:6px;
+    background:#c0392b; color:#fff; font-size:0.64rem; font-weight:800;
+    padding:4px 10px; border-radius:999px; letter-spacing:0.06em;
+  }
+  .live-dot{width:6px; height:6px; border-radius:50%; background:#fff; animation:livePulse 1.4s ease-in-out infinite;}
+  @keyframes livePulse{0%,100%{opacity:1; transform:scale(1);} 50%{opacity:0.35; transform:scale(0.75);}}
+  .live-clock{font-size:0.72rem; color:var(--text-muted); font-variant-numeric:tabular-nums;}
+  @media (prefers-reduced-motion:reduce){ .live-dot{animation:none;} }
+
+  .kpi-grid{display:grid; grid-template-columns:repeat(5,1fr); gap:12px; margin-bottom:18px;}
+  @media (max-width:900px){ .kpi-grid{grid-template-columns:repeat(2,1fr);} }
+  .kpi-tile{
+    background:var(--surface); border:1px solid var(--line-strong); border-radius:14px;
+    padding:14px 15px; box-shadow:var(--shadow);
+  }
+  .kpi-tile .k-label{font-size:0.7rem; color:var(--text-muted); font-weight:700; margin-bottom:6px;}
+  .kpi-tile .k-num{font-size:1.5rem; font-weight:800; color:var(--text); line-height:1.1; font-variant-numeric:tabular-nums;}
+  .kpi-tile .k-num.accent{color:var(--accent-strong);}
+  .kpi-tile .k-sub{font-size:0.66rem; color:var(--text-muted); margin-top:5px;}
+  .kpi-tile .k-delta{
+    display:inline-block; font-size:0.62rem; font-weight:800; margin-left:6px;
+    color:var(--accent-strong); background:var(--accent-soft); border-radius:999px; padding:2px 7px;
+    vertical-align:middle;
+  }
+  .kpi-bar{height:5px; border-radius:999px; background:var(--surface-sunken); margin-top:8px; overflow:hidden;}
+  .kpi-bar span{display:block; height:100%; border-radius:999px; background:var(--accent); transition:width .6s ease;}
+
+  .live-cols{display:grid; grid-template-columns:1.45fr 1fr; gap:16px;}
+  @media (max-width:900px){ .live-cols{grid-template-columns:1fr;} }
+  .live-cols > *{min-width:0;}
+  .live-panel{
+    background:var(--surface); border:1px solid var(--line-strong); border-radius:16px;
+    padding:16px 18px; box-shadow:var(--shadow);
+    min-width:0; overflow:hidden;
+  }
+  .live-panel h3{font-size:0.92rem; font-weight:800; margin-bottom:3px;}
+  .live-panel .lp-sub{font-size:0.7rem; color:var(--text-muted); margin-bottom:12px;}
+
+  .spark-wrap{position:relative; min-width:0;}
+  .spark{width:100%; max-width:100%; height:150px; display:block;}
+  .spark-x{display:flex; justify-content:space-between; font-size:0.6rem; color:var(--text-muted); margin-top:6px; min-width:0;}
+  .spark-x span{flex:none;}
+
+  .funnel-row{display:flex; align-items:center; gap:10px; padding:5px 0;}
+  .funnel-name{flex:none; width:118px; font-size:0.68rem; color:var(--text-secondary); font-weight:600; line-height:1.3;}
+  .funnel-track{flex:1; height:17px; border-radius:5px; background:var(--surface-sunken); overflow:hidden; display:block;}
+  .funnel-bar{display:block; height:100%; border-radius:5px; background:var(--accent); transition:width .7s ease;}
+  .funnel-bar.warn{background:var(--soil);}
+  .funnel-val{flex:none; width:52px; text-align:right; font-size:0.68rem; font-weight:800; color:var(--text); font-variant-numeric:tabular-nums;}
+  @media (max-width:520px){
+    .funnel-name{width:92px; font-size:0.63rem;}
+    .funnel-val{width:44px; font-size:0.63rem;}
+    .live-panel{padding:14px 13px;}
+  }
+  .funnel-note{
+    margin-top:12px; font-size:0.7rem; color:var(--text-secondary); line-height:1.55;
+    background:var(--warn-bg); border:1px solid var(--warn-line); color:var(--warn-text);
+    border-radius:10px; padding:10px 12px;
+  }
+
+  .feed{list-style:none; margin:0; padding:0;}
+  .feed li{
+    display:flex; align-items:center; gap:9px; padding:8px 0;
+    border-top:1px solid var(--line); font-size:0.72rem;
+    animation:feedIn .45s ease;
+  }
+  .feed li:first-child{border-top:none;}
+  @keyframes feedIn{from{opacity:0; transform:translateY(-6px);} to{opacity:1; transform:none;}}
+  @media (prefers-reduced-motion:reduce){ .feed li{animation:none;} }
+  .feed .f-time{flex:none; font-size:0.62rem; color:var(--text-muted); font-variant-numeric:tabular-nums; width:38px;}
+  .feed .f-tag{
+    flex:none; font-size:0.6rem; font-weight:800; padding:2px 7px; border-radius:999px;
+    background:var(--accent-soft); color:var(--accent-strong); white-space:nowrap;
+  }
+  .feed .f-tag.done{background:var(--accent); color:#fff;}
+  .feed .f-tag.ars{background:var(--soil-soft); color:var(--soil-strong);}
+  .feed .f-text{flex:1; color:var(--text-secondary); min-width:0; overflow:hidden; text-overflow:ellipsis; white-space:nowrap;}
+
+  .live-foot{
+    margin-top:16px; padding:14px 16px; border-radius:12px;
+    background:var(--surface-alt); border:1px solid var(--line);
+    font-size:0.78rem; color:var(--text-secondary); line-height:1.6;
+  }
+  .live-foot b{color:var(--text);}
+
   .freeform{width:100%; min-height:90px; border-radius:12px; border:1px solid var(--line-strong); background:var(--surface); padding:10px 12px; font-family:inherit; font-size:0.82rem; color:var(--text); resize:vertical;}
   .freeform::placeholder{color:var(--text-muted);}
 
@@ -544,12 +726,15 @@
       </div>
     </div>
     <div class="meta-pills">
-      <span class="pill is-accent">DEMO v0.3</span>
-      <span class="pill">8개 분야 43문항 + 보완 5건</span>
+      <span class="pill is-accent">DEMO v0.4</span>
+      <span class="pill">9개 분야 · 145문항 규모</span>
+      <span class="pill">신규사업 100선 탑재</span>
+      <span class="pill">실시간 응답 대시보드</span>
     </div>
   </div>
   <div class="lede">
     <p>농업 환경이 빠르게 바뀌는 가운데, 조합 운영이 조합원의 실제 필요와 계속 어긋나지 않으려면 그 목소리를 정기적으로 데이터로 모으는 채널이 필요합니다. <strong>이 설문은 신용·경제·복지 사업 전반의 만족도를 정량화하고, 도입을 원하는 신규 사업·작목·복지 서비스를 미리 파악해 향후 5개년 경영계획의 근거로 삼기 위해 설계</strong>했으며, 세그먼트 교차분석·신용경제 연계·고령농 투트랙·개인정보 대응·유형별 모듈 다섯 가지 검토 의견을 추가로 반영했습니다.</p>
+    <p style="margin-top:10px;">여기에 <strong>「지방정부·농림부·중앙회 연계 지역농협 신규사업 제안(안) — 확대 100선」의 10개 분야 100개 사업 전체를 설문 문항으로 탑재</strong>했습니다. 기본 43문항과 보완 모듈에 100개 사업 항목을 더해 <strong>단일 설문에서 145문항 규모까지 실제로 구동</strong>되며, 아래 미리보기에서 100개 항목이 실린 화면을 직접 넘겨보실 수 있습니다. 100문항을 넘어서도 응답 피로 없이 진행되도록 분야별 접힘(아코디언) 구조와 구간별 진행 표시를 적용했습니다.</p>
   </div>
   <div class="obj-grid">
     <div class="obj-card"><div class="obj-num">01</div><h3>만족도 정량 측정</h3><p>신용·경제·복지 사업 전반을 숫자로 확인합니다</p></div>
@@ -569,7 +754,7 @@
         <h2 class="demo-trigger" id="demoTrigger" role="button" tabindex="0">모바일 설문 미리보기</h2>
         <span class="trigger-hint">눌러서 전체화면으로 체험하기 ▶</span>
       </div>
-      <p class="desc">제목을 누르면 이 설문만 화면 전체를 채운 상태로 바로 체험할 수 있습니다. 아래 목록은 원안 43문항에 세그먼트·연계·유형별 모듈 보완 문항이 어떻게 배치되어 있는지, 지금 어느 구간을 보고 있는지 실시간으로 보여줍니다.</p>
+      <p class="desc">제목을 누르면 이 설문만 화면 전체를 채운 상태로 바로 체험할 수 있습니다. 아래 목록은 원안 43문항에 세그먼트·연계·유형별 모듈 보완 문항과 <strong>신규사업 100선 수요조사 화면(100개 항목)</strong>이 어떻게 배치되어 있는지, 지금 어느 구간을 보고 있는지 실시간으로 보여줍니다. <strong>8번째 화면에서 100개 사업 전체가 실제로 동작하는 것을 확인하실 수 있습니다.</strong></p>
     </div>
 
     <div class="workspace">
@@ -630,16 +815,87 @@
           <div class="rail-live"><span class="blip"></span>지금 이 화면에 적용됨</div>
         </div>
         <div class="rail-card" data-section="7">
+          <div class="rail-card-top"><h3>신규사업 100선 수요조사</h3><span class="rail-badge">신설 · 100항목 + 2문항</span></div>
+          <p><b>「지역농협 신규사업 제안 100선」</b>을 그대로 문항화한 신설 모듈입니다. 금융·양곡·자재·복지·교통 등 10개 분야 100개 사업을 아코디언으로 접어 담아, 한 화면에서 100개 항목을 부담 없이 훑고 고를 수 있게 했습니다. 이 한 화면이 곧 100문항 이상 확장 가능하다는 증거입니다.</p>
+          <div class="rail-live"><span class="blip"></span>지금 이 화면에 적용됨</div>
+        </div>
+        <div class="rail-card" data-section="8">
           <div class="rail-card-top"><h3>도입 희망 복지·서비스</h3><span class="rail-badge">Q36–Q38 · 3문항</span></div>
           <p>새로운 복지 서비스 수요와 자부담 의향까지 함께 확인합니다.</p>
           <div class="rail-live"><span class="blip"></span>지금 이 화면에 적용됨</div>
         </div>
-        <div class="rail-card" data-section="8">
+        <div class="rail-card" data-section="9">
           <div class="rail-card-top"><h3>미래 비전 및 자유의견</h3><span class="rail-badge">Q39–Q43 · 5문항</span></div>
           <p>향후 5년의 방향성과 조합원의 자유로운 의견을 마지막에 담습니다.</p>
           <div class="rail-live"><span class="blip"></span>지금 이 화면에 적용됨</div>
         </div>
       </div>
+    </div>
+  </section>
+
+  <section class="block" id="live">
+    <div class="block-head">
+      <span class="eyebrow">Live Dashboard · 조사 진행 모니터링</span>
+      <div class="live-head">
+        <h2>실시간 응답 현황</h2>
+        <span class="live-badge"><span class="live-dot"></span>LIVE</span>
+        <span class="live-clock" id="liveClock">—</span>
+      </div>
+      <p class="desc">설문이 발송된 순간부터 사무국이 이 화면 하나로 조사 진행을 지켜볼 수 있습니다. 응답이 들어올 때마다 수치·그래프·응답 로그가 자동으로 갱신되며, 어느 구간에서 조합원이 이탈하는지 즉시 드러납니다. <strong>아래 수치는 실제 응답이 아니라, 실시간 갱신 동작을 보여드리기 위한 시연용 모의 데이터입니다.</strong></p>
+    </div>
+
+    <div class="kpi-grid">
+      <div class="kpi-tile">
+        <div class="k-label">발송 대상</div>
+        <div class="k-num" id="kpiSent">1,842</div>
+        <div class="k-sub">전체 조합원 명부 기준</div>
+      </div>
+      <div class="kpi-tile">
+        <div class="k-label">응답 시작</div>
+        <div class="k-num accent" id="kpiStart">0<span class="k-delta" id="kpiStartDelta">+0</span></div>
+        <div class="k-sub">링크 열람 후 1문항 이상 응답</div>
+      </div>
+      <div class="kpi-tile">
+        <div class="k-label">응답 완료</div>
+        <div class="k-num accent" id="kpiDone">0</div>
+        <div class="k-sub">최종 제출까지 마친 조합원</div>
+      </div>
+      <div class="kpi-tile">
+        <div class="k-label">응답률</div>
+        <div class="k-num" id="kpiRate">0%</div>
+        <div class="kpi-bar"><span id="kpiRateBar" style="width:0%"></span></div>
+      </div>
+      <div class="kpi-tile">
+        <div class="k-label">완료율</div>
+        <div class="k-num" id="kpiComp">0%</div>
+        <div class="kpi-bar"><span id="kpiCompBar" style="width:0%"></span></div>
+      </div>
+    </div>
+
+    <div class="live-cols">
+      <div class="live-panel">
+        <h3>시간대별 응답 추이</h3>
+        <p class="lp-sub">발송 시각(09:00)부터 시간 단위 누적 응답 수 · 마지막 구간이 현재 진행 중입니다</p>
+        <div class="spark-wrap">
+          <svg class="spark" id="sparkSvg" viewBox="0 0 600 150" preserveAspectRatio="none" role="img" aria-label="시간대별 누적 응답 추이 그래프"></svg>
+        </div>
+        <div class="spark-x" id="sparkX"></div>
+
+        <h3 style="margin-top:22px;">구간별 진행·이탈 현황</h3>
+        <p class="lp-sub">응답을 시작한 조합원 중 각 화면까지 도달한 비율</p>
+        <div id="funnelBox"></div>
+        <div class="funnel-note" id="funnelNote">—</div>
+      </div>
+
+      <div class="live-panel">
+        <h3>실시간 응답 로그</h3>
+        <p class="lp-sub">개인 식별 정보는 표시되지 않으며, 세그먼트 값만 기록됩니다</p>
+        <ul class="feed" id="feedList"></ul>
+      </div>
+    </div>
+
+    <div class="live-foot">
+      <b>이 화면이 조사 중에 하는 일.</b> 응답률이 목표에 못 미치면 리마인드 발송 시점을 앞당기고, 특정 구간의 이탈률이 튀면 그 화면의 문항을 조사 도중에 손볼 수 있습니다. 70대 이상 응답자의 전화·대면조사 전환 신청이 쌓이는 속도를 보고 현장 인력 배치도 조정합니다. <b>조사가 끝난 뒤 보고서를 기다리는 대신, 진행 중에 개입할 수 있게 하는 것이 실시간 대시보드의 목적입니다.</b>
     </div>
   </section>
 
@@ -695,6 +951,40 @@
       </div>
     </div>
     <p class="track-note">제안서 예산안에 지역별 대면조사 인력비와 ARS 콜 비용을 별도 항목으로 반영할 것을 권고합니다.</p>
+  </section>
+
+  <section class="block" id="bank">
+    <div class="block-head">
+      <span class="eyebrow">신규사업 제안 100선 · 확장성 근거</span>
+      <h2>100문항 이상으로 확장 가능합니다</h2>
+      <p class="desc">「지방정부·농림부·중앙회 연계 지역농협 신규사업 제안(안) — 확대 100선」의 10개 분야 100개 사업을 하나도 빠짐없이 설문 문항으로 옮겨 담았습니다. 아래 수치는 개념이 아니라 위 미리보기에서 지금 바로 클릭해 확인할 수 있는 실제 구현 결과입니다.</p>
+    </div>
+
+    <div class="scale-banner">
+      <div class="scale-stat"><div class="ss-num">145<span style="font-size:0.9rem">문항</span></div><div class="ss-label">기본 43문항 + 보완 모듈 2문항 + 100선 항목 100개 = 단일 설문 총량</div></div>
+      <div class="scale-stat"><div class="ss-num">10<span style="font-size:0.9rem">개 분야</span></div><div class="ss-label">금융·배당·양곡·자재·기술·복지·교통·유통·교육·환경</div></div>
+      <div class="scale-stat"><div class="ss-num">100<span style="font-size:0.9rem">개 사업</span></div><div class="ss-label">제안서 원문의 100개 사업을 번호·사업명·근거까지 그대로 탑재</div></div>
+      <div class="scale-stat"><div class="ss-num">12<span style="font-size:0.9rem">단계</span></div><div class="ss-label">응답 피로를 막기 위해 구간을 나누고 진행률을 상시 표시</div></div>
+    </div>
+
+    <div class="bank-grid">
+      <div class="bank-card"><div class="bc-num">1</div><div class="bc-body"><h3>금융사업(신용사업) 확대·개편</h3><p>영농대출 저리지원, 연체채권 소각·감면, 포용금융 동행창구 등 — 중앙회 '힘내라! 우리 농업' 2200억원 프로젝트 연계</p></div><span class="bc-count">15개</span></div>
+      <div class="bank-card"><div class="bc-num">2</div><div class="bc-body"><h3>이용고배당·경제사업 활성화</h3><p>이용실적 연계 배당, 공동선별·공동출하, 연합판매, 무이자 출하선급금 상호지원 등</p></div><span class="bc-count">10개</span></div>
+      <div class="bank-card"><div class="bc-num">3</div><div class="bc-body"><h3>벼매입·쌀값안정화·양곡정책</h3><p>공공비축미 40만톤 매입, 중간정산금 조기지급, 저단백질 친환경벼 우대매입, 가루쌀 계약재배 등</p></div><span class="bc-count">12개</span></div>
+      <div class="bank-card"><div class="bc-num">4</div><div class="bc-body"><h3>영농자재 공급·생산비 절감</h3><p>무기질비료 인상분 지원, 친환경자재 공동구매, 사료 안정공급, 농기계 공동이용·임대 등</p></div><span class="bc-count">10개</span></div>
+      <div class="bank-card"><div class="bc-num">5</div><div class="bc-body"><h3>영농기술·품종개발·시험포</h3><p>지역토양 맞춤 신품종 시험포, 보급형 스마트팜 확산, 병해충 예찰·공동방제 체계 등</p></div><span class="bc-count">10개</span></div>
+      <div class="bank-card"><div class="bc-num">6</div><div class="bc-body"><h3>고령농·복지 돌봄 연계</h3><p>농촌형 통합돌봄 협약, 왕진버스, 행복콜센터, 방문미용·이동목욕, 치매 조기선별 등</p></div><span class="bc-count">12개</span></div>
+      <div class="bank-card"><div class="bc-num">7</div><div class="bc-body"><h3>교통·이동복지 연계</h3><p>천원택시 거점화, 장보기 셔틀버스, 이동장터, 무인택배함 설치 등</p></div><span class="bc-count">6개</span></div>
+      <div class="bank-card"><div class="bc-num">8</div><div class="bc-body"><h3>유통·소득증대 연계</h3><p>로컬푸드 직매장, 스마트APC, 공공급식 공급체계, 경락가 차액보전, 수출 마케팅 등</p></div><span class="bc-count">14개</span></div>
+      <div class="bank-card"><div class="bc-num">9</div><div class="bc-body"><h3>교육·문화·청년 연계</h3><p>농업인대학, 청년농 창업인큐베이팅, 청년부농부사관학교, 농촌유학 등</p></div><span class="bc-count">6개</span></div>
+      <div class="bank-card"><div class="bc-num">10</div><div class="bc-body"><h3>환경·안전 연계</h3><p>영농폐기물 공동수거, 저탄소 인증농산물 확대, 농작업 안전장비 보급, 재해복구 지원단 등</p></div><span class="bc-count">5개</span></div>
+    </div>
+
+    <div class="bank-note">
+      <b>왜 100문항을 넘겨도 응답률이 유지되는가.</b> 100개 항목을 한 페이지에 나열하면 조합원은 첫 화면에서 이탈합니다. 이 설문은 100개 사업을 10개 분야로 접어(아코디언) 초기 화면에는 분야 제목 10줄만 노출하고, 관심 분야를 펼친 조합원에게만 세부 사업을 보여줍니다. 선택은 최대 5개로 제한해 판단 부담을 줄이고, 고른 항목 안에서 1순위와 참여 의향만 추가로 묻습니다. 결과적으로 <b>실제 응답 클릭 수는 10~15회 수준이지만, 수집되는 데이터는 100개 사업 각각에 대한 수요 신호</b>가 됩니다.
+      <br><br>
+      <b>확장 여지.</b> 문항은 데이터 배열로 분리되어 있어 분야·항목 추가가 코드 수정 없이 가능합니다. 조합 여건에 따라 특정 분야를 통째로 끄거나, 지자체 공모사업·중앙회 신규 시책이 나올 때마다 항목을 덧붙이는 방식으로 <b>200문항 이상까지도 동일 구조로 확장</b>할 수 있습니다.
+    </div>
   </section>
 
   <section class="block" id="modules">
@@ -812,16 +1102,17 @@
 (function(){
   "use strict";
 
-  var TOTAL_STEPS = 11; // 0=intro, 1=기본정보, 2=유형모듈, 3..9=문항섹션, 10=완료
-  var stepNames = ["안내 및 동의","기본정보","유형별 특화 모듈","전반적 만족도","신용사업 평가","경제사업 평가","복지사업 평가","도입 희망 사업·작목","도입 희망 복지","미래 비전·의견","완료"];
+  var TOTAL_STEPS = 12; // 0=intro, 1=기본정보, 2=유형모듈, 3..10=문항섹션(8=신규사업 100선), 11=완료
+  var stepNames = ["안내 및 동의","기본정보","유형별 특화 모듈","전반적 만족도","신용사업 평가","경제사업 평가","복지사업 평가","도입 희망 사업·작목","신규사업 100선 수요조사","도입 희망 복지","미래 비전·의견","완료"];
 
   var state = {
     step: 0,
     consent: false,
     single: {},
-    multi: { farmTypes: [], creditNeed: [], ecoFocus: [], welfareChannel: [], newBiz: [], newCrops: [], cropSupport: [], newWelfare: [] },
+    multi: { farmTypes: [], creditNeed: [], ecoFocus: [], welfareChannel: [], newBiz: [], newCrops: [], cropSupport: [], newWelfare: [], bankPick: [] },
     likert: {},
     matrices: { overall: {}, credit: {}, eco: {}, welfare: {} },
+    bankOpen: 0,
     freeText: ""
   };
 
@@ -888,7 +1179,133 @@
     ]
   };
 
-  var cardSectionByStep = {1:0, 2:1, 3:2, 4:3, 5:4, 6:5, 7:6, 8:7, 9:8};
+  /* ---------- 지역농협 신규사업 제안 100선 (사업 아이디어 뱅크) ---------- */
+  /* 출처: 「지방정부·농림부·중앙회 연계 지역농협 신규사업 제안(안) — 확대 100선」 */
+  var NEWBIZ_BANK = [
+    { cat:"금융사업(신용사업) 확대·개편", items:[
+      {n:1, name:"영농대출 저리지원 상품 확대 운영", desc:"조합원·청년농·귀농인 대상 최대 2.5%p 이자지원 영농대출(중앙회 421억원 재원) 지역농협 창구 확대"},
+      {n:2, name:"농업인 일반대출 우대금리 적용", desc:"농업인 대출금리 최대 0.5%p 인하 지침을 지역농협 여신상품에 반영"},
+      {n:3, name:"특별우대금리 예금상품(연 0.2%p) 운영", desc:"조합원 대상 예적금 우대금리 상품 개발·판매로 수신기반 확충"},
+      {n:4, name:"성실납부자 원금 일부 대신상환 프로그램", desc:"이자 성실납부 조합원 대상 원금 일부 상환지원으로 상환부담 경감"},
+      {n:5, name:"재해·재난 긴급 무이자 자금 지원", desc:"태풍·가뭄 등 재해피해 농가 대상 긴급 무이자 금융(중앙회 37억원 재원) 신속집행 체계 구축"},
+      {n:6, name:"장기연체채권 소각·원금감면 프로그램", desc:"3년 경과 연체채권 중 고령자·기초수급자 등 사회적배려대상자 채권 원금·이자 감면(전국 8876억원 규모)"},
+      {n:7, name:"포용금융 동행창구 운영", desc:"취약계층 금융접근성 제고를 위한 지역농협 전용 상담창구 개설"},
+      {n:8, name:"청년 귀농·귀촌 정착대출 신설", desc:"NH청년 리턴대출 등 청년층 생계비·주거비 지원 대출상품을 지역 특성에 맞게 재설계"},
+      {n:9, name:"농업종합자금(운전·시설·개보수·농기계) 창구 강화", desc:"NH농협은행 농업종합자금대출을 지역농협이 신청대행·상담하는 원스톱 창구 운영"},
+      {n:10, name:"농업자금 이차보전사업 안내체계 구축", desc:"정부 이차보전 지원 대상 확인·서류징구 절차를 조합 여신담당이 밀착 지원"},
+      {n:11, name:"조합원 출자금 확대 및 준조합원 가입 캠페인", desc:"출자 확대를 통한 자기자본 확충 및 지역주민 준조합원 가입 유도"},
+      {n:12, name:"비조합원 대출제한 대응 조합원 확보 전략사업", desc:"가계대출 총량규제 국면에서 실수요 조합원 중심 대출구조 전환 및 신규조합원 유치"},
+      {n:13, name:"농기계·시설투자 정책자금 이차보전 연계", desc:"농림축산정책자금대출업무규정에 따른 이차보전 대상 확대 안내"},
+      {n:14, name:"고령 조합원 대상 금융사기 예방 교육", desc:"보이스피싱·불법사금융 피해예방 교육 및 지역경찰서 연계 신고체계 구축"},
+      {n:15, name:"축산농가 도우미 파견사업 자금지원 연계", desc:"경영공백 발생 축산농가에 인력파견 비용을 금융지원과 결합"}
+    ]},
+    { cat:"이용고배당·경제사업 활성화", items:[
+      {n:16, name:"이용고배당 확대를 위한 경제사업 이용률 제고 캠페인", desc:"하나로마트·경제사업 이용실적을 배당과 연계해 조합원 이용 유도 홍보"},
+      {n:17, name:"조합원 등급별 배당률 차등 인센티브제", desc:"이용실적 우수 조합원 대상 배당률 우대 및 포인트 적립제 도입"},
+      {n:18, name:"준조합원 대상 배당 확대 검토", desc:"수도권 사례를 참고해 지역 여건에 맞는 준조합원 배당제도 설계"},
+      {n:19, name:"경제사업 손익 투명화 및 조합원 설명회", desc:"정기 조합원 총회 시 경제사업 부문별 손익·배당재원 공개 설명회 실시"},
+      {n:20, name:"복지사업 재투자형 배당(이용고배당+복지환원) 모델", desc:"배당금 일부를 고령조합원 복지사업 재원으로 전환하는 환원형 모델 검토"},
+      {n:21, name:"공동선별·공동출하 확대를 통한 수수료 절감", desc:"APC 공동이용 확대로 개별출하 대비 수수료·물류비 절감 및 조합 수익 개선"},
+      {n:22, name:"온라인 하나로마트몰 활성화", desc:"지역 농산물 온라인 판매 채널 확대로 경제사업 매출 다각화"},
+      {n:23, name:"조합원 자재구매 공동구매제 확대", desc:"농약·비료·자재 공동구매로 단가 인하 및 조합 마진 확보"},
+      {n:24, name:"지역농협 간 연합판매(공동브랜드) 사업", desc:"인접 조합 간 공동출하·공동브랜드로 규모의 경제 실현(영주농협 등 상생유통 사례 참고)"},
+      {n:25, name:"무이자 출하선급금 상호지원제도", desc:"인근 농협 간 무이자 선급금 지원으로 출하시기 자금부담 완화(영주농협 사례 벤치마킹)"}
+    ]},
+    { cat:"벼매입·쌀값안정화·양곡정책 연계", items:[
+      {n:26, name:"공공비축미 매입 창구 확대 운영", desc:"40만톤(가루쌀 3.5만톤 포함) 공공비축미 매입 접수·정산 업무를 지역농협이 신속 처리"},
+      {n:27, name:"중간정산금(포대당 6만원) 조기지급 시스템", desc:"수확 직후 농가 자금난 해소를 위한 중간정산금 지급 프로세스 간소화"},
+      {n:28, name:"벼매입자금 확대 및 조기집행", desc:"조합 자체 벼매입자금 규모 확대, 수확기 집중 매입으로 산지가격 방어"},
+      {n:29, name:"저단백질 친환경벼 우대매입 시범 참여", desc:"단백질함량 하위 30% 친환경벼에 매입가 5% 가산 우대 시범사업 적극 참여"},
+      {n:30, name:"지정품종 벼 재배 전환 지도사업", desc:"시·군 사전지정 2개 품종 준수 지도 및 다수확품종(황금누리·호품 등) 대체품종 전환 컨설팅"},
+      {n:31, name:"쌀 재고 적정관리 연계 판매촉진사업", desc:"정부관리양곡 재고(2027양곡연도 말 84만톤 목표) 관리기조에 맞춰 조합 자체 쌀 소비촉진 캠페인"},
+      {n:32, name:"가루쌀(분질미) 계약재배 확대사업", desc:"가루쌀 매입물량(3.5만톤) 확대 기조에 맞춰 계약재배 농가 발굴 및 가공업체 연계"},
+      {n:33, name:"취약계층 공급용 우대매입 쌀 유통협력", desc:"경로당·무료급식단체 공급용 우대매입 쌀의 지역 내 유통·배분 협력"},
+      {n:34, name:"쌀값 안정화 자율감축(생산조정) 인센티브 연계", desc:"수급조절용 벼(타작물 전환 등) 참여농가 조합 차원 인센티브 지원"},
+      {n:35, name:"벼 건조·저장시설(RPC) 현대화 지원", desc:"지자체 매칭 고정투자로 저온저장·건조시설 확충해 품질 및 가격경쟁력 제고"},
+      {n:36, name:"쌀 등급판정·품질관리 강화사업", desc:"단백질함량 측정장비 도입 등 품질관리로 우대매입 대상 선정률 제고"},
+      {n:37, name:"농가 벼 재배면적 신고 지원 서비스", desc:"정확한 수급계획 수립을 위한 재배면적 신고 대행·안내 서비스"}
+    ]},
+    { cat:"유기농자재·영농자재 공급·생산비 절감", items:[
+      {n:38, name:"무기질비료 가격인상분 지원 확대", desc:"정부·지자체와 공동으로 비료가격 인상분의 80% 지원 시행"},
+      {n:39, name:"친환경(유기농)자재 공동구매 확대", desc:"유기질비료·친환경농약 등 인증자재 공동구매로 단가 인하"},
+      {n:40, name:"사료 경쟁력 있는 가격 공급체계 구축", desc:"축협 연계 사료가격을 경쟁사 대비 낮은 수준으로 안정 공급"},
+      {n:41, name:"영양제·살충제 할인공급 프로그램", desc:"작황관리용 영양제·방제자재 할인공급으로 경영비 절감"},
+      {n:42, name:"영농인력 무상·저가 공급 지원사업", desc:"일손부족 해소를 위한 영농인력 알선 및 일부 무상공급 지원"},
+      {n:43, name:"친환경 유기농업자재 실증 및 보급", desc:"농업기술센터와 연계한 친환경자재 효과 실증 후 조합원 보급"},
+      {n:44, name:"저탄소 인증 자재(완효성비료 등) 확대보급", desc:"온실가스 저감형 자재 보급으로 저탄소농업 인증 확대와 연계"},
+      {n:45, name:"농기계 공동이용·임대사업 확대", desc:"고가 농기계 공동구입·임대은행 운영으로 개별 투자부담 완화"},
+      {n:46, name:"폐农자재(폐비닐·농약용기) 수거 연계 자재할인", desc:"폐자재 반납 시 신규자재 구매할인 인센티브 제공"},
+      {n:47, name:"종자·종묘 공동구매 및 저가공급", desc:"우량종자 공동구매로 개별구매 대비 단가 절감"}
+    ]},
+    { cat:"영농기술·품종개발·시험포 연계", items:[
+      {n:48, name:"지역토양 맞춤형 신품종 시험포 공동운영", desc:"농업기술센터·농업기술원과 조합 부지에 시험포 조성, 대체품종 실증재배"},
+      {n:49, name:"밭작물 대체품종 보급 협력사업", desc:"이상기후·병해 대응 콩·참깨·들깨 등 신품종 공동보급"},
+      {n:50, name:"영농현장 실증과제 공동발굴 및 신청대행", desc:"농업인 수요조사 후 농업기술센터 실증과제 신청을 조합이 대행"},
+      {n:51, name:"스마트팜 원격제어장치 및 보급형 스마트팜 확산", desc:"1680여곳 보급형 스마트팜 확충계획(149억원)과 지자체 보조금 매칭"},
+      {n:52, name:"국산 사료작물 종자 보급망 구축", desc:"축산농가 대상 조사료 자급률 제고 국산종자 공급협력"},
+      {n:53, name:"저탄소·기후대응 신품종 실증재배단", desc:"폭염 등 기후대응형 채소·특작물 실증재배단 운영"},
+      {n:54, name:"지역 대표 특산물 계약재배 안정화사업", desc:"수급불안 품목의 대체품종 도입 등 계약재배 다변화"},
+      {n:55, name:"종자은행·육묘장 공동운영", desc:"지자체 유휴부지·폐교 활용 육묘장 조성 및 저가 종묘 공급"},
+      {n:56, name:"병해충 예찰 및 공동방제 대응체계", desc:"농업기술센터 예찰정보와 조합 공동방제단 연계 조기경보체계"},
+      {n:57, name:"AI 도축로봇 등 디지털 축산 기반 구축", desc:"중앙회 디지털농업 기반 구축계획과 연계한 축산시설 현대화"}
+    ]},
+    { cat:"고령농·복지 돌봄 연계", items:[
+      {n:58, name:"농촌형 통합돌봄 서비스 협약 참여", desc:"지자체·주민공동체와 함께 식사·세탁·안부확인 서비스 공급계획 수립 참여"},
+      {n:59, name:"찾아가는 왕진버스(이동진료) 지원", desc:"농식품부·지자체·보건소 협업 이동의료서비스에 조합시설 거점 제공"},
+      {n:60, name:"무연고 홀몸노인 행복콜센터 운영", desc:"정기 안부전화·방문서비스로 고독사 예방"},
+      {n:61, name:"노후주택 무상 수리봉사단 운영", desc:"임직원 재능기부로 벽지·장판 등 주거환경 개선"},
+      {n:62, name:"방문미용·이동목욕 서비스", desc:"거동불편 고령 조합원 대상 방문미용·목욕 서비스"},
+      {n:63, name:"치매안심 조기선별·인지건강 프로그램", desc:"보건소 연계 치매선별검사 및 인지훈련"},
+      {n:64, name:"생신축하 꾸러미(생일 케어박스) 사업", desc:"고령 조합원 생일 시 지역농산물·생필품 꾸러미 배송"},
+      {n:65, name:"요양병원·데이케어센터 연계 위탁운영", desc:"농촌지역 요양·주간보호시설 위탁운영 검토"},
+      {n:66, name:"농촌형 재가돌봄 요양보호사 양성·파견", desc:"지역인력 요양보호사 양성 후 조합 자회사 형태 파견"},
+      {n:67, name:"고령농업인 돌봄사업 확대(중앙회 방침 연계)", desc:"중앙회 '농협 대전환' 16개 개혁과제 중 고령농 돌봄 확대 방침을 지역 실정에 맞게 구체화"},
+      {n:68, name:"청년농업인 영농정착 지원 확대", desc:"중앙회 방침에 따른 청년후계농 정착지원·영농정착자금 연계"},
+      {n:69, name:"햇빛연금(태양광) 사업 보급", desc:"고령 조합원 대상 농지 태양광 햇빛연금 사업 안내 및 참여 지원"}
+    ]},
+    { cat:"교통·이동복지 연계", items:[
+      {n:70, name:"천원택시(행복콜택시) 연계 홍보·거점화", desc:"조합 하나로마트·지점을 승하차 거점으로 지정"},
+      {n:71, name:"장보기 셔틀버스 운영", desc:"하나로마트 이용 고령 조합원 대상 정기 셔틀버스 운행"},
+      {n:72, name:"농산물 출하 공동수송 차량 지원", desc:"소농·고령농의 농산물 공동집하·수송 차량 임대·운영"},
+      {n:73, name:"도서·낙도지역 철선(도선) 운영 지원", desc:"지자체 항로보조와 연계해 농기자재·생필품 배송선 공동운영"},
+      {n:74, name:"면단위 이동장터(로컬푸드 화물차) 운영", desc:"교통취약 마을 순회 이동판매 서비스"},
+      {n:75, name:"택배·무인물류함 설치 확대", desc:"교통취약지 조합지점 무인택배함으로 물류접근성 개선"}
+    ]},
+    { cat:"유통·소득증대 연계", items:[
+      {n:76, name:"로컬푸드 직매장·농가레스토랑 설치", desc:"지자체 매칭보조로 로컬푸드 직매장 및 농가식당 조성"},
+      {n:77, name:"산지유통센터(APC) 현대화 및 스마트APC 확대", desc:"저온저장·선별시설 확충 및 스마트 APC 도입"},
+      {n:78, name:"학교급식·공공급식 지역농산물 공급체계", desc:"지자체 급식지원센터 연계 우선납품체계 구축"},
+      {n:79, name:"경락가격 차액보전(약정가격제) 확대", desc:"공판장 약정가격과 실제 경락가 차액보전으로 농가 수취가 안정화"},
+      {n:80, name:"농가맛집·체험관광 브랜드화 지원", desc:"지자체 관광부서 연계 농가맛집 인증·홍보"},
+      {n:81, name:"지역 특산물 공동브랜드 구축 및 온라인몰 입점", desc:"공동브랜드·패키지 개발 및 판매채널 다각화"},
+      {n:82, name:"6차산업화 가공시설 공동이용", desc:"장류·건조식품 등 소규모 가공시설 공동이용"},
+      {n:83, name:"폐교·유휴시설 리모델링 청년농 임대사업", desc:"지자체 보조·금융지원 결합 리모델링 후 청년농 저가임대"},
+      {n:84, name:"농업인력중개센터 공동운영", desc:"외국인 계절근로자·내국인 일손 중개 공동운영"},
+      {n:85, name:"귀농·귀촌인 정착지원 패키지사업", desc:"지자체 귀농창업·주택구입 지원과 조합 영농자금·교육 연계"},
+      {n:86, name:"농산물 수출 확대 해외마케팅 지원", desc:"중앙회 수출확대 방침에 따른 지역 특산물 해외판로 개척"},
+      {n:87, name:"농협금융 고객 대상 농산물 판매행사", desc:"은행 고객 기반을 활용한 지역농산물 직거래 판촉행사"},
+      {n:88, name:"축산농가 도축수수료 절감 지원", desc:"민간 대비 낮은 도축수수료 유지를 통한 축산농가 경영비 절감"},
+      {n:89, name:"농작물재해보험 가입 확대 및 할증제외 지원", desc:"마늘·양파 등 우선 적용 할증제외 정책 안내 및 가입확대"}
+    ]},
+    { cat:"교육·문화·청년 연계", items:[
+      {n:90, name:"농업인대학·평생교육 프로그램 공동운영", desc:"지자체 평생학습관 연계 스마트농업·경영교육"},
+      {n:91, name:"청년농업인 창업인큐베이팅센터", desc:"지자체 청년정책과 조합 영농자금 결합 청년농 창업지원"},
+      {n:92, name:"청년부농부사관학교 지역 연계 운영", desc:"중앙회 미래농업지원센터 교육과정을 지역 조합원 대상 확대"},
+      {n:93, name:"농촌 유학·체험학습 프로그램", desc:"지자체 교육청 연계 도농교류형 체험농장 운영"},
+      {n:94, name:"다문화가정·외국인근로자 정착지원", desc:"지자체 다문화가족지원센터 연계 정착교육"},
+      {n:95, name:"마을공동체 문화행사·경로잔치 지원", desc:"지자체 문화예산 매칭 마을축제·경로잔치 후원"}
+    ]},
+    { cat:"환경·안전 연계", items:[
+      {n:96, name:"영농폐기물 공동수거·재활용사업", desc:"폐비닐·농약용기 지자체 환경부서 공동수거체계"},
+      {n:97, name:"친환경·저탄소 인증농산물 확대사업", desc:"지자체 저탄소농업 지원금 연계 인증확대 및 우대수매"},
+      {n:98, name:"농작업 안전재해 예방 캠페인·안전장비 보급", desc:"농업인안전보험 연계 안전장비 보급"},
+      {n:99, name:"재해대응 공동방제·재해복구 지원단", desc:"지자체 재난대응반과 조합 공동방제단 합동출동체계"},
+      {n:100, name:"축산농가 경영공백 지원(질병·재해 시 대체인력)", desc:"가축전염병·재해 발생 시 경영공백 최소화 대체인력 파견"}
+    ]}
+  ];
+  var NEWBIZ_TOTAL = NEWBIZ_BANK.reduce(function(a,c){ return a + c.items.length; }, 0); // 100
+
+  var cardSectionByStep = {1:0, 2:1, 3:2, 4:3, 5:4, 6:5, 7:6, 8:7, 9:8, 10:9};
 
   function el(id){ return document.getElementById(id); }
 
@@ -971,7 +1388,7 @@
     html += '<div class="consent-box">';
     html += '<div class="info-row"><svg class="ico" viewBox="0 0 24 24" fill="none"><path d="M12 3l7 3v5c0 5-3.2 8.5-7 10-3.8-1.5-7-5-7-10V6l7-3Z" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/></svg><span>조합원 여러분의 의견을 바탕으로 조합 운영을 진단하고, 앞으로 5년의 사업 방향을 함께 설계하기 위한 조사입니다. 조합장 개인의 활동을 평가·홍보하는 문항은 포함되어 있지 않습니다.</span></div>';
     html += '<div class="info-row"><svg class="ico" viewBox="0 0 24 24" fill="none"><path d="M4 6l8 6 8-6" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/><rect x="3" y="5" width="18" height="14" rx="2" stroke="currentColor" stroke-width="1.6"/></svg><span>조합원 한 분 한 분께 개별 고유 링크를 문자로 발송해 드리며, 본인만 1회 응답하실 수 있습니다. 응답 내용은 통계 목적으로만 활용되며 개인정보는 철저히 보호됩니다.</span></div>';
-    html += '<div class="info-row"><svg class="ico" viewBox="0 0 24 24" fill="none"><circle cx="12" cy="12" r="8.5" stroke="currentColor" stroke-width="1.6"/><path d="M12 7v5l3.2 2" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></svg><span>예상 소요 시간 10~15분, 8개 분야 문항으로 구성되어 있습니다.</span></div>';
+    html += '<div class="info-row"><svg class="ico" viewBox="0 0 24 24" fill="none"><circle cx="12" cy="12" r="8.5" stroke="currentColor" stroke-width="1.6"/><path d="M12 7v5l3.2 2" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></svg><span>예상 소요 시간 12~18분입니다. 9개 분야로 구성되며, 여기에는 지방정부·농림부·중앙회 정책과 연계 가능한 <b>신규사업 100선 수요조사</b>가 포함되어 있습니다. 관심 있는 분야만 펼쳐서 보실 수 있습니다.</span></div>';
     html += '<div class="consent-check"><input type="checkbox" id="consentBox"'+(state.consent?" checked":"")+'><label for="consentBox">개인정보 수집·이용 목적(조사 응답 처리)에 동의합니다</label></div>';
     html += '</div>';
     return html;
@@ -1090,6 +1507,68 @@
     return html;
   }
 
+  /* 지역농협 신규사업 제안 100선 — 아코디언형 수요조사 화면 */
+  function renderNewBizBank(){
+    var picked = state.multi.bankPick || (state.multi.bankPick = []);
+    var MAX = 5;
+
+    var html = '<span class="module-tag city">신규사업 제안 100선 연계 모듈</span>';
+    html += '<div class="screen-title">신규사업 100선 수요조사</div>';
+    html += '<div class="screen-sub">지방정부·농림부·중앙회 정책과 연계 가능한 100개 사업 중, 우리 조합에 먼저 도입되기를 바라는 사업을 골라주세요</div>';
+
+    html += '<div class="bank-summary"><span class="bs-label">10개 분야 · 총 '+NEWBIZ_TOTAL+'개 사업 중 선택</span>'+
+            '<span class="bs-count">'+picked.length+' / '+MAX+'</span></div>';
+
+    NEWBIZ_BANK.forEach(function(cat, ci){
+      var open = state.bankOpen === ci;
+      var selInCat = cat.items.filter(function(it){ return picked.indexOf(String(it.n)) !== -1; }).length;
+      html += '<div class="idea-cat'+(open?' is-open':'')+'">';
+      html += '<button type="button" class="idea-cat-head" data-bankcat="'+ci+'" aria-expanded="'+(open?'true':'false')+'">'+
+                '<span class="idea-cat-num">'+(ci+1)+'</span>'+
+                '<span class="idea-cat-name">'+cat.cat+'</span>'+
+                '<span class="idea-cat-meta">'+
+                  '<span class="idea-cat-badge'+(selInCat?' has-sel':'')+'">'+(selInCat? selInCat+'개 선택' : cat.items.length+'개')+'</span>'+
+                  '<span class="idea-chev">▼</span>'+
+                '</span>'+
+              '</button>';
+      if (open){
+        html += '<div class="idea-cat-body">';
+        cat.items.forEach(function(it){
+          var v = String(it.n);
+          var checked = picked.indexOf(v) !== -1;
+          var disabled = !checked && picked.length >= MAX;
+          var id = "bank__" + v;
+          html += '<div class="idea-card">'+
+            '<input type="checkbox" data-group="bankPick" id="'+id+'" value="'+v+'"'+(checked?' checked':'')+(disabled?' disabled':'')+'>'+
+            '<label for="'+id+'">'+
+              '<span class="ic-no">No.'+it.n+'</span>'+
+              '<span class="ic-name">'+it.name+'</span>'+
+              '<span class="ic-desc">'+it.desc+'</span>'+
+            '</label></div>';
+        });
+        html += '</div>';
+      }
+      html += '</div>';
+    });
+
+    if (picked.length){
+      var lookup = {};
+      NEWBIZ_BANK.forEach(function(c){ c.items.forEach(function(it){ lookup[String(it.n)] = it; }); });
+      var opts = picked.map(function(v){ return lookup[v] ? lookup[v].name : v; });
+      html += field("선택하신 사업 중 가장 먼저 추진되기를 바라는 1순위 사업",
+        '<div class="select-row">' + opts.map(function(nm){
+          return optCard("bankTop", nm, nm, "1순위로 지정", state.single.bankTop === nm);
+        }).join('') + '</div>');
+      html += field("해당 사업이 도입된다면 참여하실 의향은 어느 정도입니까?",
+        likert("bankJoin", state.likert.bankJoin, "전혀 없음", "매우 높음"));
+    } else {
+      html += '<p class="field-hint">분야를 눌러 펼친 뒤, 관심 있는 사업을 최대 '+MAX+'개까지 선택해 주세요.</p>';
+    }
+
+    html += '<p class="field-hint">이 화면 하나에만 '+NEWBIZ_TOTAL+'개 사업 항목이 실려 있습니다. 실제 조사에서는 조합 여건에 따라 분야별로 문항을 켜고 끌 수 있으며, 선택 결과는 분야별 수요 순위로 자동 집계됩니다.</p>';
+    return html;
+  }
+
   function renderSection7(){
     var html = '<div class="screen-title">도입 희망 복지·서비스</div><div class="screen-sub">확대되었으면 하는 복지 서비스를 알려주세요</div>';
     html += field("새로 도입·확대를 바라는 복지·서비스 (최대 3개)", chipRowMulti("newWelfare", OPTS.newWelfare, 3));
@@ -1115,12 +1594,16 @@
     if (state.single.npType) html += '<span class="pill">'+state.single.npType+'</span>';
     if (state.multi.farmTypes.length) html += '<span class="pill">'+state.multi.farmTypes[0]+(state.multi.farmTypes.length>1?" 외 "+(state.multi.farmTypes.length-1)+"건":"")+'</span>';
     if (state.single.scale) html += '<span class="pill">'+state.single.scale+'</span>';
+    if (state.multi.bankPick && state.multi.bankPick.length) html += '<span class="pill">신규사업 '+state.multi.bankPick.length+'건 선택</span>';
     html += '</div>';
+    if (state.single.bankTop){
+      html += '<div class="warn-card" style="background:var(--accent-soft); border-color:var(--accent); color:var(--accent-strong);"><b>1순위로 지정하신 신규사업</b>'+state.single.bankTop+'</div>';
+    }
     html += '<p style="font-size:0.82rem;color:var(--text-secondary)">응답 내용은 다른 조합원 응답과 함께 세그먼트별로 교차분석되어, 향후 5년간 조합 경영계획의 근거 자료로 활용됩니다. 문의사항은 ○○농업협동조합으로 연락 주십시오.</p>';
     return html;
   }
 
-  var renderers = [renderStep0, renderSection1, renderTypeModule, renderSection2, renderSection3, renderSection4, renderSection5, renderSection6, renderSection7, renderSection8, renderDone];
+  var renderers = [renderStep0, renderSection1, renderTypeModule, renderSection2, renderSection3, renderSection4, renderSection5, renderSection6, renderNewBizBank, renderSection7, renderSection8, renderDone];
 
   function stepValid(){
     var s = state.single, m = state.multi, lk = state.likert;
@@ -1146,8 +1629,9 @@
         if (m.newBiz.length===0) return false;
         if (s.newCropTry === "yes") return m.newCrops.length>0;
         return s.newCropTry === "no";
-      case 8: return !!(m.newWelfare.length>0 && s.welfarePriority && s.selfPay);
-      case 9: return !!(s.vision5y && s.communityRole && s.improveNeed && lk.matchLevel);
+      case 8: return !!(m.bankPick && m.bankPick.length>0 && s.bankTop && lk.bankJoin);
+      case 9: return !!(m.newWelfare.length>0 && s.welfarePriority && s.selfPay);
+      case 10: return !!(s.vision5y && s.communityRole && s.improveNeed && lk.matchLevel);
       default: return true;
     }
   }
@@ -1200,6 +1684,24 @@
         var v = inp.value, idx = arr.indexOf(v);
         if (inp.checked){ if (idx===-1) arr.push(v); }
         else { if (idx!==-1) arr.splice(idx,1); }
+        if (g === "bankPick" && state.single.bankTop){
+          // 1순위로 지정했던 사업의 선택이 해제되면 1순위도 함께 해제
+          var stillPicked = false;
+          NEWBIZ_BANK.forEach(function(c){
+            c.items.forEach(function(it){
+              if (it.name === state.single.bankTop && arr.indexOf(String(it.n)) !== -1) stillPicked = true;
+            });
+          });
+          if (!stillPicked) state.single.bankTop = null;
+        }
+        render();
+      });
+    });
+
+    body.querySelectorAll(".idea-cat-head").forEach(function(btn){
+      btn.addEventListener("click", function(){
+        var ci = parseInt(btn.getAttribute("data-bankcat"), 10);
+        state.bankOpen = (state.bankOpen === ci) ? -1 : ci;
         render();
       });
     });
@@ -1262,8 +1764,8 @@
     if (restartBtn) restartBtn.addEventListener("click", function(){
       state = {
         step:0, consent:false, single:{},
-        multi:{ farmTypes:[], creditNeed:[], ecoFocus:[], welfareChannel:[], newBiz:[], newCrops:[], cropSupport:[], newWelfare:[] },
-        likert:{}, matrices:{ overall:{}, credit:{}, eco:{}, welfare:{} }, freeText:""
+        multi:{ farmTypes:[], creditNeed:[], ecoFocus:[], welfareChannel:[], newBiz:[], newCrops:[], cropSupport:[], newWelfare:[], bankPick:[] },
+        likert:{}, matrices:{ overall:{}, credit:{}, eco:{}, welfare:{} }, bankOpen:0, freeText:""
       };
       render();
     });
@@ -1282,6 +1784,205 @@
       html += '</div>';
     });
     el("chartArea").innerHTML = html;
+  }
+
+  /* ---------- 실시간 응답 현황 대시보드 (시연용 모의 데이터) ---------- */
+  var LIVE = {
+    sent: 1842,
+    started: 968,
+    done: 731,
+    hours: ["09","10","11","12","13","14","15","16","17"],
+    series: [64, 182, 337, 396, 468, 611, 742, 869, 968],
+    funnel: [
+      ["안내 및 동의", 100.0],
+      ["기본정보", 97.4],
+      ["유형별 특화 모듈", 95.1],
+      ["전반적 만족도", 93.6],
+      ["신용사업 평가", 90.2],
+      ["경제사업 평가", 87.8],
+      ["복지사업 평가", 86.1],
+      ["도입 희망 사업·작목", 84.3],
+      ["신규사업 100선", 81.7],
+      ["도입 희망 복지", 79.9],
+      ["미래 비전·의견", 77.6],
+      ["제출 완료", 75.5]
+    ]
+  };
+
+  var FEED_SEG = [
+    ["50대 · 논농업(벼) · 평야형", "eco"],
+    ["60대 · 과수 · 중산간형", "eco"],
+    ["40대 · 시설원예 · 도시형", "eco"],
+    ["70대 · 논농업(벼) · 중산간형", "ars"],
+    ["30대 이하 · 축산 · 평야형", "eco"],
+    ["60대 · 밭농업(채소·과채류) · 도시형", "eco"],
+    ["80대 이상 · 논농업(벼) · 중산간형", "ars"],
+    ["50대 · 특용작물·약초 · 중산간형", "eco"],
+    ["40대 · 과수 · 평야형", "eco"],
+    ["60대 · 축산 · 평야형", "eco"]
+  ];
+  var FEED_ACT = [
+    ["신규사업 100선 응답", "eco"],
+    ["설문 제출 완료", "done"],
+    ["신용사업 평가 진행", "eco"],
+    ["복지사업 평가 진행", "eco"],
+    ["전화·대면조사 전환 신청", "ars"],
+    ["기본정보 입력 완료", "eco"],
+    ["설문 제출 완료", "done"]
+  ];
+
+  function fmt(n){ return n.toLocaleString("ko-KR"); }
+  function pad2(n){ return (n<10?"0":"")+n; }
+
+  function drawSpark(){
+    var svg = el("sparkSvg");
+    if (!svg) return;
+    var s = LIVE.series, W = 600, H = 150, pad = 6;
+    var max = Math.max.apply(null, s) * 1.12;
+    var pts = s.map(function(v, i){
+      var x = (i / (s.length - 1)) * (W - pad*2) + pad;
+      var y = H - pad - (v / max) * (H - pad*2);
+      return [x, y];
+    });
+    var line = pts.map(function(p, i){ return (i?"L":"M") + p[0].toFixed(1) + " " + p[1].toFixed(1); }).join(" ");
+    var area = line + " L" + pts[pts.length-1][0].toFixed(1) + " " + (H-pad) + " L" + pts[0][0].toFixed(1) + " " + (H-pad) + " Z";
+    var last = pts[pts.length-1];
+    var html = '';
+    html += '<defs><linearGradient id="sparkGrad" x1="0" y1="0" x2="0" y2="1">'+
+             '<stop offset="0%" stop-color="var(--accent)" stop-opacity="0.34"/>'+
+             '<stop offset="100%" stop-color="var(--accent)" stop-opacity="0.02"/></linearGradient></defs>';
+    for (var g=1; g<=3; g++){
+      var gy = pad + (H - pad*2) * (g/4);
+      html += '<line x1="'+pad+'" y1="'+gy.toFixed(1)+'" x2="'+(W-pad)+'" y2="'+gy.toFixed(1)+'" stroke="var(--line)" stroke-width="1"/>';
+    }
+    html += '<path d="'+area+'" fill="url(#sparkGrad)"/>';
+    html += '<path d="'+line+'" fill="none" stroke="var(--accent)" stroke-width="2.5" stroke-linejoin="round" stroke-linecap="round"/>';
+    pts.forEach(function(p, i){
+      if (i === pts.length-1) return;
+      html += '<circle cx="'+p[0].toFixed(1)+'" cy="'+p[1].toFixed(1)+'" r="2.6" fill="var(--surface)" stroke="var(--accent)" stroke-width="1.6"/>';
+    });
+    html += '<circle cx="'+last[0].toFixed(1)+'" cy="'+last[1].toFixed(1)+'" r="5" fill="var(--accent)"><animate attributeName="r" values="5;8;5" dur="1.6s" repeatCount="indefinite"/><animate attributeName="opacity" values="1;0.45;1" dur="1.6s" repeatCount="indefinite"/></circle>';
+    html += '<text x="'+Math.min(last[0], W-40).toFixed(1)+'" y="'+Math.max(last[1]-12, 14).toFixed(1)+'" text-anchor="middle" font-size="15" font-weight="800" fill="var(--accent-strong)">'+fmt(LIVE.series[LIVE.series.length-1])+'</text>';
+    svg.innerHTML = html;
+
+    var xs = el("sparkX");
+    if (xs) xs.innerHTML = LIVE.hours.map(function(h){ return '<span>'+h+'시</span>'; }).join('');
+  }
+
+  function drawFunnel(){
+    var box = el("funnelBox");
+    if (!box) return;
+    var html = '';
+    var worstDrop = 0, worstIdx = 1;
+    LIVE.funnel.forEach(function(f, i){
+      if (i === 0) return;
+      var drop = LIVE.funnel[i-1][1] - f[1];
+      if (drop > worstDrop){ worstDrop = drop; worstIdx = i; }
+    });
+    LIVE.funnel.forEach(function(f, i){
+      var isWorst = (i === worstIdx);
+      html += '<div class="funnel-row">'+
+        '<span class="funnel-name">'+f[0]+'</span>'+
+        '<span class="funnel-track"><span class="funnel-bar'+(isWorst?' warn':'')+'" style="width:'+f[1].toFixed(1)+'%"></span></span>'+
+        '<span class="funnel-val">'+f[1].toFixed(1)+'%</span>'+
+      '</div>';
+    });
+    box.innerHTML = html;
+    var note = el("funnelNote");
+    if (note){
+      note.textContent = "이탈이 가장 큰 구간: 「" + LIVE.funnel[worstIdx][0] + "」 — 직전 구간 대비 " +
+        worstDrop.toFixed(1) + "%p 감소. 해당 화면의 문항 수·난이도 점검이 필요합니다.";
+    }
+  }
+
+  function drawKpi(prevStarted){
+    var rate = LIVE.started / LIVE.sent * 100;
+    var comp = LIVE.done / LIVE.started * 100;
+    el("kpiSent").textContent = fmt(LIVE.sent);
+    el("kpiStart").childNodes[0].nodeValue = fmt(LIVE.started);
+    el("kpiDone").textContent = fmt(LIVE.done);
+    el("kpiRate").textContent = rate.toFixed(1) + "%";
+    el("kpiComp").textContent = comp.toFixed(1) + "%";
+    el("kpiRateBar").style.width = rate.toFixed(1) + "%";
+    el("kpiCompBar").style.width = comp.toFixed(1) + "%";
+    var d = el("kpiStartDelta");
+    if (d && typeof prevStarted === "number"){
+      var diff = LIVE.started - prevStarted;
+      d.textContent = diff > 0 ? "+" + diff : "+0";
+    }
+  }
+
+  function tickClock(){
+    var c = el("liveClock");
+    if (!c) return;
+    var n = new Date();
+    c.textContent = "마지막 갱신 " + pad2(n.getHours()) + ":" + pad2(n.getMinutes()) + ":" + pad2(n.getSeconds());
+  }
+
+  function pushFeed(){
+    var list = el("feedList");
+    if (!list) return;
+    var seg = FEED_SEG[Math.floor(Math.random()*FEED_SEG.length)];
+    var act = FEED_ACT[Math.floor(Math.random()*FEED_ACT.length)];
+    var tag = seg[1] === "ars" ? "ars" : act[1];
+    var n = new Date();
+    var li = document.createElement("li");
+    li.innerHTML = '<span class="f-time">'+pad2(n.getHours())+':'+pad2(n.getMinutes())+'</span>'+
+      '<span class="f-tag '+(tag==="done"?"done":(tag==="ars"?"ars":""))+'">'+(tag==="done"?"완료":(tag==="ars"?"전환":"응답"))+'</span>'+
+      '<span class="f-text">'+seg[0]+' · '+act[0]+'</span>';
+    list.insertBefore(li, list.firstChild);
+    while (list.children.length > 8) list.removeChild(list.lastChild);
+  }
+
+  function liveTick(){
+    var prev = LIVE.started;
+    var addStart = 1 + Math.floor(Math.random()*4);
+    var addDone = Math.floor(Math.random()*3);
+    if (LIVE.started + addStart < LIVE.sent){
+      LIVE.started += addStart;
+      LIVE.series[LIVE.series.length-1] = LIVE.started;
+    }
+    if (LIVE.done + addDone < LIVE.started) LIVE.done += addDone;
+
+    // 구간별 도달률도 미세하게 흔들어 실제 집계처럼 보이게 함
+    for (var i=1; i<LIVE.funnel.length; i++){
+      var jitter = (Math.random() - 0.5) * 0.34;
+      var v = LIVE.funnel[i][1] + jitter;
+      var ceil = LIVE.funnel[i-1][1] - 0.2;
+      LIVE.funnel[i][1] = Math.max(1, Math.min(v, ceil));
+    }
+
+    drawKpi(prev);
+    drawSpark();
+    drawFunnel();
+    tickClock();
+    if (Math.random() < 0.8) pushFeed();
+  }
+
+  function startLiveDashboard(){
+    if (!el("sparkSvg")) return;
+    drawKpi();
+    drawSpark();
+    drawFunnel();
+    tickClock();
+    for (var i=0; i<6; i++) pushFeed();
+
+    var timer = null;
+    function run(){ if (!timer) timer = setInterval(liveTick, 2600); }
+    function halt(){ if (timer){ clearInterval(timer); timer = null; } }
+
+    // 화면에 보일 때만 갱신 (배터리·CPU 절약)
+    if ("IntersectionObserver" in window){
+      var io = new IntersectionObserver(function(entries){
+        entries.forEach(function(e){ e.isIntersecting ? run() : halt(); });
+      }, { threshold: 0.05 });
+      io.observe(el("live"));
+    } else {
+      run();
+    }
+    document.addEventListener("visibilitychange", function(){
+      document.hidden ? halt() : run();
+    });
   }
 
   function enterFullscreenDemo(){
@@ -1312,5 +2013,6 @@
 
   render();
   renderChart();
+  startLiveDashboard();
 })();
 </script>
