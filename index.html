@@ -1,5 +1,8 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
+<meta http-equiv="Pragma" content="no-cache">
+<meta http-equiv="Expires" content="0">
 <title>조합원 동행 시스템</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -631,6 +634,12 @@
     margin-top:64px; padding:24px; border-top:1px solid var(--line);
     text-align:center; font-size:0.76rem; color:var(--text-muted);
   }
+  .build-stamp{
+    margin-top:10px; display:inline-block;
+    font-size:0.72rem; font-weight:600; letter-spacing:0.02em;
+    padding:5px 12px; border-radius:999px;
+    background:var(--accent-soft); color:var(--accent-strong);
+  }
 
   /* ---------- Demo trigger heading ---------- */
   .demo-trigger-row{ display:flex; align-items:center; gap:12px; flex-wrap:wrap; }
@@ -1096,6 +1105,7 @@
 
   <footer>
     이 페이지는 시연용 데모이며, 표시된 수치와 응답 데이터는 예시입니다.
+    <div class="build-stamp">빌드 v0.4.1 · 2026-08-29 20:48 KST · 10개 분야 150문항</div>
   </footer>
 </div>
 
