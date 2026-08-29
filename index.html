@@ -796,7 +796,7 @@
         </div>
         <div class="rail-card" data-section="1">
           <div class="rail-card-top"><h3>유형별 특화 모듈</h3><span class="rail-badge">Q7–Q8 · 2문항</span></div>
-          <p>앞서 선택한 도시형·중산간형·평야형 유형에 따라 문항이 자동으로 바뀝니다.</p>
+          <p>앞서 선택한 도시형·중산간형·농촌형(평야) 유형에 따라 문항이 자동으로 바뀝니다.</p>
           <div class="rail-live"><span class="blip"></span>지금 이 화면에 적용됨</div>
         </div>
         <div class="rail-card" data-section="2">
@@ -1001,7 +1001,7 @@
     <div class="block-head">
       <span class="eyebrow">핵심 스펙</span>
       <h2>농협 유형별 특화 선택 모듈</h2>
-      <p class="desc">전국 농협을 도시형·중산간형·평야형으로 나누고, 제안서에 바로 삽입할 수 있도록 유형별 문항 모듈을 별도 장표로 정리했습니다. 조합원이 기본정보 화면에서 유형을 선택하면 설문에도 동일하게 반영됩니다.</p>
+      <p class="desc">전국 농협을 도시형·중산간형·농촌형(평야)으로 나누고, 제안서에 바로 삽입할 수 있도록 유형별 문항 모듈을 별도 장표로 정리했습니다. 조합원이 기본정보 화면에서 유형을 선택하면 설문에도 동일하게 반영됩니다.</p>
     </div>
     <div class="type-grid">
       <div class="type-card">
@@ -1024,8 +1024,8 @@
       </div>
       <div class="type-card">
         <div class="type-card-head">
-          <div class="type-swatch" style="background:var(--river)">평</div>
-          <div><h3>평야형</h3><p class="type-desc">대규모 경작·미곡 중심 지역</p></div>
+          <div class="type-swatch" style="background:var(--river)">농</div>
+          <div><h3>농촌형(평야)</h3><p class="type-desc">대규모 경작·미곡 중심 지역</p></div>
         </div>
         <div class="type-q"><b>미곡종합처리장(RPC) 이용 만족도</b>5점 척도</div>
         <div class="type-q"><b>대형 농기계 공동이용 서비스 수요</b>5점 척도</div>
@@ -1105,7 +1105,7 @@
 
   <footer>
     이 페이지는 시연용 데모이며, 표시된 수치와 응답 데이터는 예시입니다.
-    <div class="build-stamp">빌드 v0.4.1 · 2026-08-29 20:48 KST · 10개 분야 150문항</div>
+    <div class="build-stamp">빌드 v0.4.2 · 2026-08-29 20:52 KST · 10개 분야 150문항</div>
   </footer>
 </div>
 
@@ -1184,7 +1184,7 @@
       {key:"m1", q:"임산물 유통지원 서비스 만족도", type:"likert"},
       {key:"m2", q:"고령농 영농대행(방제·수확) 이용 의향", type:"select", opts:["이미 이용중","의향 있음","없음"]}
     ],
-    "평야형": [
+    "농촌형(평야)": [
       {key:"m1", q:"미곡종합처리장(RPC) 이용 만족도", type:"likert"},
       {key:"m2", q:"대형 농기계 공동이용 서비스 수요", type:"likert"}
     ]
@@ -1418,7 +1418,7 @@
     html += field("소속 농협 유형", '<div class="select-row">'+
       optCard("npType","도시형","도시형","겸업·귀농·1인가구 비중이 높은 지역", state.single.npType==="도시형")+
       optCard("npType","중산간형","중산간형","임산물·고령농 비중이 높은 지역", state.single.npType==="중산간형")+
-      optCard("npType","평야형","평야형","대규모 경작·미곡 중심 지역", state.single.npType==="평야형")+
+      optCard("npType","농촌형(평야)","농촌형(평야)","대규모 경작·미곡 중심 지역", state.single.npType==="농촌형(평야)")+
       '</div>');
     html += '<p class="field-hint">연령층 × 영농형태 × 경작규모 × 농협유형을 교차분석 키로 사용해, 이후 모든 만족도·수요 문항을 세그먼트별로 나누어 볼 수 있습니다.</p>';
     return html;
@@ -1821,16 +1821,16 @@
   };
 
   var FEED_SEG = [
-    ["50대 · 논농업(벼) · 평야형", "eco"],
+    ["50대 · 논농업(벼) · 농촌형(평야)", "eco"],
     ["60대 · 과수 · 중산간형", "eco"],
     ["40대 · 시설원예 · 도시형", "eco"],
     ["70대 · 논농업(벼) · 중산간형", "ars"],
-    ["30대 이하 · 축산 · 평야형", "eco"],
+    ["30대 이하 · 축산 · 농촌형(평야)", "eco"],
     ["60대 · 밭농업(채소·과채류) · 도시형", "eco"],
     ["80대 이상 · 논농업(벼) · 중산간형", "ars"],
     ["50대 · 특용작물·약초 · 중산간형", "eco"],
-    ["40대 · 과수 · 평야형", "eco"],
-    ["60대 · 축산 · 평야형", "eco"]
+    ["40대 · 과수 · 농촌형(평야)", "eco"],
+    ["60대 · 축산 · 농촌형(평야)", "eco"]
   ];
   var FEED_ACT = [
     ["정책연계 사업 응답", "eco"],
